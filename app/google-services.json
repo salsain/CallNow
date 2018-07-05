@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "178500804535",
+    "firebase_url": "https://cyrilrayancallnow.firebaseio.com",
+    "project_id": "cyrilrayancallnow",
+    "storage_bucket": "cyrilrayancallnow.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:178500804535:android:d1a10d09047dce9d",
+        "android_client_info": {
+          "package_name": "com.cyril_rayan.callnow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "178500804535-j9gbr29cl44kbmv98trj071mb1p9o6bt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxClnxstRsq_0Ver2xMjVlDjP84sfmT_g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:178500804535:android:5cd41dd1d126ecb4",
+        "android_client_info": {
+          "package_name": "com.cyril_rayan.callnow_free"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "178500804535-j9gbr29cl44kbmv98trj071mb1p9o6bt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxClnxstRsq_0Ver2xMjVlDjP84sfmT_g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

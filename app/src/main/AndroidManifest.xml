@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.cyril_rayan.callnow">
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature android:glEsVersion="0x00020000" />
+
+    <permission
+        android:name="us.zoom.loginexample.permission.KUBI_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="us.zoom.loginexample.permission.KUBI_MESSAGE" />
+
+    <application
+        android:name=".MainApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".login.SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".WelcomeScreen" />
+        <activity android:name=".MainActivity">
+
+            <!--
+            intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter
+            -->
+        </activity>
+        <activity android:name=".AddContactActivity" />
+        <activity
+            android:name="com.salesforce.android.restsample.SfdcRestSample"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.salesforce.android.restsample.AccountGetActivity"
+            android:label="Get Accounts" />
+        <activity
+            android:name="com.salesforce.android.restsample.LeadsGetActivity"
+            android:label="Get Leads" />
+        <activity
+            android:name=".AutoConnectToZoomActivity"
+            android:label="Auto Connect To Zoom"></activity>
+        <activity
+            android:name="com.salesforce.android.restsample.FollowUpGetActivity"
+            android:label="Get Follow ups" />
+        <activity android:name=".SelectContactsActivity" />
+        <activity android:name=".SubscriptionsScreen" />
+        <activity android:name="com.google.ad.AdxActivity" />
+        <activity
+            android:name=".login.LoginFrActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".login.TermsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <service android:name=".ActivityRecognizedService" />
+
+        <activity
+            android:name="us.zoom.loginexample.ZoomWelcomeActivity"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/this_app_name"
+            android:theme="@style/ZMTheme.MainWindow">
+
+            <!--
+            intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter
+            -->
+        </activity>
+        <activity
+            android:name="us.zoom.loginexample.ZoomLoginActivity"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/this_app_name"
+            android:theme="@style/ZMTheme.MainWindow">
+
+            <!--
+            intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter
+            -->
+        </activity>
+        <activity
+            android:name="us.zoom.loginexample.ZoomWorkEmailUserExampleActivity"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/this_app_name"
+            android:theme="@style/ZMTheme.MainWindow">
+
+            <!--
+            intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter
+            -->
+        </activity>
+        <activity
+            android:name="us.zoom.loginexample.ZoomCallSequenceActivity"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/this_app_name"
+            android:theme="@style/ZMTheme.MainWindow"></activity>
+        <activity
+            android:name="us.zoom.loginexample.ZoomPreMeetingExampleActivity"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/this_app_name"
+            android:theme="@style/ZMTheme.MainWindow">
+
+            <!--
+            intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter
+            -->
+        </activity>
+        <activity
+            android:name="us.zoom.loginexample.ZoomScheduleMeetingExampleActivity"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/this_app_name"
+            android:theme="@style/ZMTheme.MainWindow">
+
+            <!--
+            intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter
+            -->
+        </activity>
+        <activity
+            android:name="us.zoom.loginexample.ZoomMyInviteActivity"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/invite_acitivity_name"
+            android:theme="@style/ZMTheme.MainWindow">
+            <intent-filter>
+                <action android:name="us.zoom.loginexample.intent.action.MeetingInvite" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="us.zoom.loginexample.ZoomMyWaitJoinActivity"
+            android:icon="@drawable/ic_launcher"
+            android:theme="@style/ZMTheme.MainWindow">
+            <intent-filter>
+                <action android:name="us.zoom.loginexample.intent.action.JoinBeforeHost" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!--
+        activity
+          android:name="com.dropbox.client2.android.AuthActivity"
+          android:configChanges="orientation|keyboard"
+          android:theme="@style/ZMTheme.SubWindow"
+          android:launchMode="singleTask" >
+            <intent-filter>
+                <data android:scheme="db-YourAppKey" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity
+        -->
+
+        <activity android:name=".PrepareSnowboyActivity" android:label="Prepare SnowboyVoice">
+
+        </activity>
+    </application>
+
+</manifest>

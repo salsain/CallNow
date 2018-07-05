@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/import_all_contacts"
+        android:icon="@drawable/icon"
+        android:title="All Contacts"
+        />
+
+    <item
+        android:id="@+id/import_leads_contacts"
+        android:icon="@drawable/icon"
+        android:title="Only Leads"
+        />
+
+    <item
+        android:id="@+id/import_follow_up"
+        android:icon="@drawable/icon"
+        android:title="Today Task Contact"
+        />
+</menu>

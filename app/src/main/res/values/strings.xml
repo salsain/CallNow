@@ -1,0 +1,77 @@
+<resources>
+    <!--string name="app_name">CallNow</string-->
+    <string name="app_name">Call Now</string>
+    <string name="targetAccountLabel">Account Name</string>
+    <string name="accountBillingStreetLabel">Billing Street</string>
+    <string name="accountBillingCityLabel">Billing City</string>
+    <string name="accountBillingStateLabel">Billing State</string>
+    <string name="save">Save</string>
+    <string name="oAuthUrl">https://login.salesforce.com</string>
+    <string name="consumerKey"></string>
+    <string name="callbackUrl">sfdcsample:success</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_settings">Settings</string>
+
+    <string name="subscription_period_prompt">Select your subscription period</string>
+    <string name="subscription_resignup_prompt">To reactivate your subscription, select your subscription period</string>
+    <string name="subscription_update_prompt">To change your subscription, select your new subscription period</string>
+    <string name="subscription_period_monthly">Monthly</string>
+    <string name="subscription_period_yearly">Yearly</string>
+    <string name="subscription_prompt_continue">Continue</string>
+    <string name="subscription_prompt_cancel">Cancel</string>
+    <string name="content_description_app_loading_image">App loading image</string>
+    <string name="content_description_title_image">80\'s Video Game Style Car Logo</string>
+    <string name="content_desc_gas_gauge_indicator">Gas gauge indicator</string>
+    <string name="content_desc_free_vs_premium_indicator">Free or Premium Image Indicator</string>
+
+
+    <string name="contacts_list_ended">Contacts list ended</string>
+    <string name="we_call_now_to_next_contacts">We call now to next contacts:\n\n</string>
+    <string name="tel">tel:</string>
+    <string name="have_no_activity_for_call">Could not find an activity to place the call.</string>
+    <string name="call_sequence_ended">Call sequence was ended</string>
+    <string name="empty_call_list_warning">Calling list empty, press \"SELECT CONTACTS\" and choose persons for call</string>
+    <string name="make_calls_cofiration_title">Make calls Confirmation</string>
+    <string name="make_calls_cofiration_positive_button">Go!</string>
+    <string name="cancel">Cancel</string>
+    <string name="new_contact_ready_for_call">New contact ready for call:</string>
+    <string name="enter_phone_num_warning">Please, enter phone number</string>
+    <string name="enter_valid_phone_warning">Please, enter valid phone num</string>
+    <string name="note_name_will_be">Note: name will be \"</string>
+    <string name="reading_contacts_from_os">Reading contacts :</string>
+    <string name="select_contacts_is_limited">Select contacts limited on %d items</string>
+    <string name="get_crm_disable_warning_not_paid">Get contacts from CRM disabled now</string>
+    <string name="get_crm_disable_warning_not_paid_need_subscribe">You need subscription for use this feature</string>
+    <string name="subscriptions">Subscriptions</string>
+    <string name="crm_salesforce_failed_get_accounts">Failed export accounts from Salesforce</string>
+    <string name="crm_salesforce_failed_get_leads">Failed export leads from Salesforce</string>
+    <string name="follow_up_contact_format" formatted="false">%s(account: %s; task: %s)</string>
+
+
+    <!-- -
+    This is an ad unit ID for an interstitial test ad. Replace with your own interstitial ad unit id.
+    For more information, see https://support.google.com/admob/answer/3052638
+    <!- -->
+    <string name="banner_footer_ad_unit_id">ca-app-pub-7765385595865071/5159712942</string>
+    <string name="interstitial_ad_unit_id">ca-app-pub-7765385595865071/8609849273</string>
+
+    <string name="signup_txt">Call now</string>
+    <string name="signUp">Sing Up</string>
+    <string name="to_reset">To reset your Password please enter\nyour email address</string>
+    <string name="submit">SUBMIT</string>
+    <string name="attachmentimage">Attachment Image</string>
+    <color name="Black">#000000</color>
+
+    <string name="this_app_name">Zoom Call</string>
+    <string name="invite_acitivity_name">Zoom Invite</string>
+	
+	<string name="snowboy_voice_prepare_hint">This app used voice input, so record your voice so CallNow can detect your voice to do end the call \n\n Push the Play button and say "End Call" 3 times with a short 1 second wait after each time you say it.</string>
+	<string name="prepare_snowboy">  Click below button to record your voice and download new model.</string>
+    <string name="record_you_voice">start record</string>
+</resources>

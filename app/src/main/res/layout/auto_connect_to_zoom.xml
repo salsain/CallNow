@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <TextView
+          android:id="@+id/commentari"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="getting calendar events..."/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:weightSum="1"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/callZoomContacts"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Call"/>
+        </LinearLayout>
+
+        <LinearLayout
+          android:paddingTop="20dp"
+          android:layout_width="match_parent"
+          android:weightSum="1"
+          android:layout_height="wrap_content">
+
+            <Button
+              android:id="@+id/loginToZoom"
+              android:layout_width="0dp"
+              android:layout_weight="1"
+              android:layout_height="wrap_content"
+              android:text="Login to Zoom"/>
+        </LinearLayout>
+
+        <LinearLayout
+          android:paddingTop="20dp"
+          android:layout_width="match_parent"
+          android:weightSum="1"
+          android:visibility="gone"
+          android:layout_height="wrap_content">
+
+            <Button
+              android:id="@+id/resetZoomLogin"
+              android:layout_width="0dp"
+              android:layout_weight="1"
+              android:layout_height="wrap_content"
+              android:text="Reset Zoom Login"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/noteTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
