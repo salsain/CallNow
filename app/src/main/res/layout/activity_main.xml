@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -21,69 +21,108 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
-            android:weightSum="1" >
+            android:weightSum="1">
 
         </RelativeLayout>
 
         <com.google.android.gms.ads.AdView
-          android:id="@+id/adView"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_centerHorizontal="true"
-          android:layout_alignParentBottom="true"
-          ads:adSize="BANNER"
-          app:adUnitId="@string/banner_footer_ad_unit_id">
-        </com.google.android.gms.ads.AdView>
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            ads:adSize="BANNER"
+            app:adUnitId="@string/banner_footer_ad_unit_id"></com.google.android.gms.ads.AdView>
 
         <LinearLayout
             android:id="@+id/bottomTabLl"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_alignParentBottom="true"
-            android:gravity="bottom"
-            android:weightSum="3"
-            android:orientation="horizontal" >
-            <TextView
-                android:id="@+id/callNowTab"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="#006B54"
-                android:gravity="center"
-                android:layout_margin="1dp"
-                android:text="Call Now"/>
-            <TextView
-                android:id="@+id/infoTab"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:background="#006B54"
-                android:gravity="center"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                android:text="Info"/>
-            <TextView
-                android:id="@+id/modelTab"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:background="#006B54"
-                android:gravity="center"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                android:text="Model"/>
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="3">
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/callNowTab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:drawableLeft="@drawable/call_now_selector"
+                    android:drawablePadding="8dp"
+                    android:gravity="center"
+                    android:text="Make Call"
+                    android:textColor="@drawable/blue_text_selector" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:background="@color/colorPrimary" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/infoTab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:drawableLeft="@drawable/info_selector"
+                    android:drawablePadding="8dp"
+                    android:gravity="center"
+                    android:text="Info"
+                    android:textColor="@drawable/blue_text_selector" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:background="@color/colorPrimary" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/modelTab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:drawableLeft="@drawable/voice_selector"
+                    android:drawablePadding="8dp"
+                    android:gravity="center"
+                    android:text="Voice "
+                    android:textColor="@drawable/blue_text_selector" />
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
 
     <TextView
         android:id="@+id/userActivityTextView"
-        android:padding="10dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:text="UNKNOWN ACTIVITY"
         android:layout_width="wrap_content"
-        android:textColor="@color/colorAccent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:padding="10dp"
+        android:text="UNKNOWN ACTIVITY"
+        android:textColor="@color/colorAccent" />
 
 </RelativeLayout>
 

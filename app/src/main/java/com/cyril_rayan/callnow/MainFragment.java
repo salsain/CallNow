@@ -34,6 +34,7 @@ import android.os.Handler;
 
 import com.common.utility.PermissionCheckService;
 import com.common.utility.ViaAdActivityRunner;
+import com.skyfishjy.library.RippleBackground;
 
 import ai.kitt.snowboy.AppResCopy;
 import ai.kitt.snowboy.audio.RecordingThread;
@@ -41,12 +42,12 @@ import ai.kitt.snowboy.MsgEnum;
 
 public class MainFragment extends Fragment {
 
-    View runUserSelectContactsButton;
+//    View runUserSelectContactsButton;
     View runManualAddContactsButton;
     View runImportCRMContactsButton;
 
     View makeCallsButton;
-    View autoConnectToZoom;
+//    View autoConnectToZoom;
     TextView makeCallsText;
 
     //calling
@@ -74,7 +75,7 @@ public class MainFragment extends Fragment {
         @Override
         public void handleMessage(Message msg) {
             MsgEnum message = MsgEnum.getMsgEnum(msg.what);
-            switch(message) {
+            switch (message) {
                 case MSG_ACTIVE:
                     activeTimes++;
 //                    updateLog(" ===> Detected " + activeTimes + " times", "white");
@@ -101,6 +102,7 @@ public class MainFragment extends Fragment {
             }
         }
     };
+    private RippleBackground rippleBackground;
 
 
     void resetSequence() {
@@ -122,18 +124,24 @@ public class MainFragment extends Fragment {
     String logString = "";
 
     @Override
+    public void onStop() {
+        super.onStop();
+        rippleBackground.stopRippleAnimation();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        rippleBackground.startRippleAnimation();
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        rippleBackground = (RippleBackground) getView().findViewById(R.id.content);
 
-        runUserSelectContactsButton = getView().findViewById(R.id.runUserSelectContactsButton);
-        runUserSelectContactsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                runUserSelectContacts(true);
-            }
-        });
-
-        makeCallsButton =  getView().findViewById(R.id.makeCallsButton);
+        rippleBackground.startRippleAnimation();
+        makeCallsButton = getView().findViewById(R.id.makeCallsButton);
         makeCallsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,16 +153,6 @@ public class MainFragment extends Fragment {
         });
 
         makeCallsText = (TextView) getView().findViewById(R.id.makeCallsText);
-
-
-        autoConnectToZoom =  getView().findViewById(R.id.autoConnectToZoom);
-        autoConnectToZoom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                runAutoConnectToZoom();
-            }
-        });
-
 
         runManualAddContactsButton = getView().findViewById(R.id.runManualAddContactsButton);
         runManualAddContactsButton.setOnClickListener(new View.OnClickListener() {
@@ -205,7 +203,7 @@ public class MainFragment extends Fragment {
 
         String phonesListString = null;
 
-        for (int i = 0; i < callContactSequenceCount; ++i){
+        for (int i = 0; i < callContactSequenceCount; ++i) {
             int indexInArray = callContactCurrentIndex + i;
             if (StaticMemory.getInstance().selectedContactClassList.size() > indexInArray) {
                 ContactInfo contact = StaticMemory.getInstance().selectedContactClassList.get(indexInArray);
@@ -241,10 +239,9 @@ public class MainFragment extends Fragment {
 
     private TelephonyManager tm;
 
-    private void addCallListener()
-    {
+    private void addCallListener() {
         tm = (TelephonyManager) getActivity().getSystemService(Activity.TELEPHONY_SERVICE);
-        tm.listen(phoneStateListener, PhoneStateListener.LISTEN_CALL_STATE | PhoneStateListener.LISTEN_MESSAGE_WAITING_INDICATOR );
+        tm.listen(phoneStateListener, PhoneStateListener.LISTEN_CALL_STATE | PhoneStateListener.LISTEN_MESSAGE_WAITING_INDICATOR);
     }
 
     PhoneCallListener phoneStateListener = new PhoneCallListener();
@@ -297,7 +294,7 @@ public class MainFragment extends Fragment {
         }
     }
 
-    boolean forceEndCall(){
+    boolean forceEndCall() {
         try {
             // Get the boring old TelephonyManager
             TelephonyManager telephonyManager =
@@ -392,7 +389,7 @@ public class MainFragment extends Fragment {
     }
 
     void performSequenceCallingFromContactList() {
-        if (StaticMemory.getInstance().selectedContactClassList == null){
+        if (StaticMemory.getInstance().selectedContactClassList == null) {
             if (recordingThread != null) recordingThread.stopRecording();
             return;
         }
@@ -439,7 +436,7 @@ public class MainFragment extends Fragment {
     }
     */
 
-    void runUserSelectContacts(boolean useSystemContacts){
+    void runUserSelectContacts(boolean useSystemContacts) {
         ViaAdActivityRunner.runSelectContactsActivity(getActivity(), useSystemContacts);
     }
 
@@ -455,7 +452,7 @@ public class MainFragment extends Fragment {
                 callContactCurrentIndex = 0;
                 resetSequence();
                 return;
-            } else if (requestCode == REQUEST_VOICE_RECOGNITION_CODE){
+            } else if (requestCode == REQUEST_VOICE_RECOGNITION_CODE) {
                 List<String> results = data.getStringArrayListExtra(
                         RecognizerIntent.EXTRA_RESULTS);
                 if (results == null || results.isEmpty())
@@ -482,7 +479,7 @@ public class MainFragment extends Fragment {
         String spokenText = spokenText_.toLowerCase();
         if (spokenText.contains("hang up") ||
                 spokenText.contains("end call") ||
-                spokenText.contains("and call")){
+                spokenText.contains("and call")) {
             Toast.makeText(getActivity(), "END CALL DETECTED:", Toast.LENGTH_LONG).show();
             logString += "\nEND CALL DETECTED!";
             forceEndCall();
@@ -535,43 +532,39 @@ public class MainFragment extends Fragment {
     class SpeechListener implements RecognitionListener {
         final String TAG = SpeechListener.class.getName();
 
-        public void onReadyForSpeech(Bundle params)
-        {
+        public void onReadyForSpeech(Bundle params) {
             Log.d(TAG, "onReadyForSpeech");
         }
-        public void onBeginningOfSpeech()
-        {
+
+        public void onBeginningOfSpeech() {
             Log.d(TAG, "onBeginningOfSpeech");
         }
-        public void onRmsChanged(float rmsdB)
-        {
+
+        public void onRmsChanged(float rmsdB) {
             Log.d(TAG, "onRmsChanged");
         }
-        public void onBufferReceived(byte[] buffer)
-        {
+
+        public void onBufferReceived(byte[] buffer) {
             Log.d(TAG, "onBufferReceived");
         }
-        public void onEndOfSpeech()
-        {
+
+        public void onEndOfSpeech() {
             Log.d(TAG, "onEndofSpeech");
         }
 
-        public void onError(int error)
-        {
-            Log.e(TAG,  "error " +  error);
+        public void onError(int error) {
+            Log.e(TAG, "error " + error);
             logString += "\nSpeechListener Error:" + error;
             //mText.setText("error " + error);
             Toast.makeText(getActivity(), "SpeechListener error:" + error, Toast.LENGTH_LONG).show();
             runSpeechRecognizer();
         }
 
-        public void onResults(Bundle results)
-        {
+        public void onResults(Bundle results) {
             Log.d(TAG, "onResults " + results);
             ArrayList data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
 
-            for (int i = 0; i < data.size(); i++)
-            {
+            for (int i = 0; i < data.size(); i++) {
                 Log.d(TAG, "result " + data.get(i));
             }
 
@@ -579,12 +572,11 @@ public class MainFragment extends Fragment {
             runSpeechRecognizer();
         }
 
-        public void onPartialResults(Bundle partialResults)
-        {
+        public void onPartialResults(Bundle partialResults) {
             Log.d(TAG, "onPartialResults");
         }
-        public void onEvent(int eventType, Bundle params)
-        {
+
+        public void onEvent(int eventType, Bundle params) {
             logString += "\nSpeechRecognizer event: " + eventType;
             Toast.makeText(getActivity(), "SpeechListener onEvent:" + eventType, Toast.LENGTH_LONG).show();
             Log.d(TAG, "onEvent " + eventType);

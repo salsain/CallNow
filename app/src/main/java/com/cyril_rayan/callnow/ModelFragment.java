@@ -1,14 +1,36 @@
 package com.cyril_rayan.callnow;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioTrack;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.common.utility.CountDownAnimation;
+import com.skyfishjy.library.RippleBackground;
+
+import java.io.File;
+import java.io.IOException;
+
+import ai.kitt.snowboy.ApiSnowBoy;
+import ai.kitt.snowboy.Constants;
+import ai.kitt.snowboy.audio.PlaybackThread;
+import ai.kitt.snowboy.audio.WavRecorder;
 
 
 /**
@@ -19,7 +41,7 @@ import android.widget.Button;
  * Use the {@link ModelFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ModelFragment extends Fragment {
+public class ModelFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,6 +52,17 @@ public class ModelFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private RippleBackground rippleBackground;
+    private TextView mRecordOne, mRecordTwo, mRecordThree;
+    private WavRecorder wavRecorder = null;
+    private MediaPlayer player = new MediaPlayer();
+    private PlaybackThread playbackThread = new PlaybackThread();
+    private TextView countdown_tv;
+    private ImageView genModel;
+    private TextView record_file;
+    private int currentRecording = 1;
+    private String currentFilePath = Constants.VOICE_FILE1;    /**/
+
 
     public ModelFragment() {
         // Required empty public constructor
@@ -63,22 +96,133 @@ public class ModelFragment extends Fragment {
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
+        rippleBackground.stopRippleAnimation();
+        try {
+            stopRecording();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        rippleBackground.startRippleAnimation();
+    }
+
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_model, container, false);
+        TextView headerTv = ((TextView) view.findViewById(R.id.txtToolbarTitle));
+        headerTv.setText("Call Now");
 
-        Button genModel = (Button) view.findViewById(R.id.modelGen);
+        return view;
+    }
+
+    private String setFileName(int currentRecording) {
+        String fileName = "";
+        switch (currentRecording) {
+            case 1:
+                fileName = "Record 1";
+                currentFilePath = Constants.VOICE_FILE1;
+                break;
+            case 2:
+                fileName = "Record 2";
+                currentFilePath = Constants.VOICE_FILE2;
+                break;
+            case 3:
+                fileName = "Record 3";
+                currentFilePath = Constants.VOICE_FILE3;
+                break;
+            default:
+
+        }
+        return fileName;
+    }
+
+    private void startCountDown() {
+        countdown_tv.setVisibility(View.VISIBLE);
+        genModel.setVisibility(View.GONE);
+        countdown_tv.setText("Ready");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startRecording(currentFilePath);
+                CountDownAnimation countDownAnimation = new CountDownAnimation(countdown_tv, 5);
+                countDownAnimation.setCountDownListener(new CountDownAnimation.CountDownListener() {
+                    @Override
+                    public void onCountDownEnd(CountDownAnimation animation) {
+                        stopRecording();
+                        if ((currentRecording + 1) <= 3) {
+                            ++currentRecording;
+                            record_file.setText(setFileName(currentRecording));
+                        }
+                        genModel.setVisibility(View.VISIBLE);
+                    }
+                });
+                countDownAnimation.start();
+
+            }
+        }, 1000);
+
+    }
+
+    public void startRecording(final String fileName) {
+        if (wavRecorder != null)
+            stopRecording();
+
+        wavRecorder = new WavRecorder(fileName);
+        wavRecorder.startRecording();
+    }
+
+    public void stopRecording() {
+        if (wavRecorder == null) {
+            return;
+        }
+        wavRecorder.stopRecording();
+        wavRecorder = null;
+
+    }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        rippleBackground = (RippleBackground) view.findViewById(R.id.content);
+        rippleBackground.startRippleAnimation();
+        record_file = (TextView) view.findViewById(R.id.record_file);
+        record_file.setText(setFileName(currentRecording));
+        countdown_tv = (TextView) view.findViewById(R.id.countdown_tv);
+        countdown_tv.setVisibility(View.GONE);
+        genModel = (ImageView) view.findViewById(R.id.modelGen);
+        genModel.setVisibility(View.VISIBLE);
         genModel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), PrepareSnowboyActivity.class);
-                startActivity(intent);
+                startCountDown();
             }
         });
-
-        return view;
+        try {
+            generateNewModel();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mRecordOne = (TextView) view.findViewById(R.id.recode_one);
+        mRecordTwo = (TextView) view.findViewById(R.id.recode_two);
+        mRecordThree = (TextView) view.findViewById(R.id.recode_three);
+        mRecordOne.setVisibility(View.GONE);
+        mRecordTwo.setVisibility(View.GONE);
+        mRecordThree.setVisibility(View.GONE);
+        mRecordOne.setOnClickListener(this);
+        mRecordTwo.setOnClickListener(this);
+        mRecordThree.setOnClickListener(this);
+        checkVoiceFileExist();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -105,6 +249,124 @@ public class ModelFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.recode_one:
+                playVoice(Constants.VOICE_FILE1, mRecordOne);
+                break;
+            case R.id.recode_two:
+                playVoice(Constants.VOICE_FILE2, mRecordTwo);
+                break;
+            case R.id.recode_three:
+                playVoice(Constants.VOICE_FILE3, mRecordThree);
+                break;
+        }
+    }
+
+    public void playVoice(final String filename, final TextView textView) {
+        textView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.mipmap.pause, 0);
+        if (playbackThread.playing())
+            playbackThread.stopPlayback();
+
+        playbackThread.startPlayback(new AudioTrack.OnPlaybackPositionUpdateListener() {
+            @Override
+            public void onMarkerReached(AudioTrack track) {
+                int audio = track.getAudioFormat();
+                playbackThread.stopPlayback();
+                textView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.mipmap.play, 0);
+            }
+
+            @Override
+            public void onPeriodicNotification(AudioTrack track) {
+                //int audio = track.getAudioFormat();
+            }
+        }, filename);
+    }
+
+    public void checkVoiceFileExist() {
+        try {
+            File file = new File(Constants.VOICE_FILE1);
+            if (file.exists())
+                mRecordOne.setVisibility(View.VISIBLE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            File file = new File(Constants.VOICE_FILE2);
+            if (file.exists())
+                mRecordTwo.setVisibility(View.VISIBLE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            File file = new File(Constants.VOICE_FILE3);
+            if (file.exists())
+                mRecordThree.setVisibility(View.VISIBLE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void generateNewModel() throws IOException {
+        wavRecorder = new WavRecorder(Constants.VOICE_FILE1);
+        final byte[] data1 = playbackThread.readPCMData(Constants.VOICE_FILE1);
+
+        if (data1 == null) {
+            alertMessage("Check the Voice1 again!");
+            return;
+        }
+
+        final byte[] data2 = playbackThread.readPCMData(Constants.VOICE_FILE2);
+        if (data2 == null) {
+            alertMessage("Check the Voice2 again!");
+            return;
+        }
+        final byte[] data3 = playbackThread.readPCMData(Constants.VOICE_FILE3);
+        if (data3 == null) {
+            alertMessage("Check the Voice3 again!");
+            return;
+        }
+
+        String name = "EndCall";
+
+        String vbuf1 = Base64.encodeToString(wavRecorder.AddWaveFileHeadertoBuffer(data1), Base64.NO_WRAP);
+        String vbuf2 = Base64.encodeToString(wavRecorder.AddWaveFileHeadertoBuffer(data2), Base64.NO_WRAP);
+        String vbuf3 = Base64.encodeToString(wavRecorder.AddWaveFileHeadertoBuffer(data3), Base64.NO_WRAP);
+
+        byte[] response = ApiSnowBoy.requestModel(name, "en", "20_29", "M", "macbook microphone", vbuf1, vbuf2, vbuf3);
+
+        if (response == null) {
+            Log.e("Null message ", "Voice model request failed! Try again!");
+        } else {
+            boolean ret = ApiSnowBoy.writeDataToFile(Constants.MODEL_PATH, Constants.NEW_MODEL, response);
+            if (ret) {
+                ApiSnowBoy.moveFile(Constants.MODEL_PATH, Constants.NEW_MODEL, Constants.DEFAULT_WORK_SPACE);
+            }
+        }
+    }
+
+    public void alertMessage(String msg) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+        alert.setMessage(msg);
+        alert.setNeutralButton("OK", null);
+        alert.create().show();
+    }
+
+    AudioTrack.OnPlaybackPositionUpdateListener playBackListener = new AudioTrack.OnPlaybackPositionUpdateListener() {
+        @Override
+        public void onMarkerReached(AudioTrack track) {
+            int audio = track.getAudioFormat();
+//            onEndOfPlayBack();
+            playbackThread.stopPlayback();
+        }
+
+        @Override
+        public void onPeriodicNotification(AudioTrack track) {
+            //int audio = track.getAudioFormat();
+        }
+    };
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -119,4 +381,6 @@ public class ModelFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
 }

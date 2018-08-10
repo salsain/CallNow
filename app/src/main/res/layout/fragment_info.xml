@@ -4,20 +4,54 @@
     android:layout_height="match_parent"
     tools:context="com.cyril_rayan.callnow.InfoFragment">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/custom_toolbar" />
+
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:padding="10dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="25dp"
+            android:src="@mipmap/info" />
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Call Now is an app which helps with safe Calls While Driving"
+            android:textColor="@color/DarkGrey"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:text="Since there are 1.6 million accidents caused by phone usage while driving, according to the National Safety Council, we built CallNow,an app that promotes safe calling for all and accelerated daily follow up calls for sales people. "
+            android:textColor="#89899B"
+            android:textSize="18sp"
+            android:textStyle="normal" />
 
         <Button
             android:id="@+id/runSubscriptions"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/subscriptions"
-            android:layout_height="wrap_content" />
+            android:visibility="gone" />
 
     </LinearLayout>
-
 
 
 </RelativeLayout>

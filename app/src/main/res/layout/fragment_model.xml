@@ -1,25 +1,159 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.cyril_rayan.callnow.ModelFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/custom_toolbar" />
 
+    <LinearLayout
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:orientation="vertical"
+        android:padding="15dp">
 
-    <TextView
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Voice Recoder"
+            android:textColor="@color/DarkGrey"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/record_screen"
+            android:textColor="#89899B" />
+
+        <TextView
+            android:id="@+id/record_file"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center_horizontal"
+            android:text="Record 1"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/prepare_snowboy"
-        android:textColor="@color/blue_txt"/>
+        android:layout_above="@id/recorded"
+        android:layout_below="@+id/text">
 
-    <Button
-        android:id="@+id/modelGen"
-        android:layout_width="150dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginLeft="130dp"
-        android:text="Recording Voice"
-        android:textSize="20dp"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/effect" />
 
-</FrameLayout>
+        <com.skyfishjy.library.RippleBackground xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/makeCallsButton"
+            android:layout_below="@+id/makeCallstext"
+            app:rb_color="@color/colorPrimary"
+            app:rb_duration="6000"
+            app:rb_radius="50dp"
+            app:rb_rippleAmount="4"
+            app:rb_scale="6">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+
+                <ImageView
+                    android:id="@+id/modelGen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="15dp"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:padding="15dp"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/record"
+                    android:textSize="@dimen/text_size_main" />
+
+                <TextView
+                    android:id="@+id/countdown_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center_vertical"
+                    android:text="Ready"
+                    android:textColor="@color/white"
+                    android:textSize="35sp"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+        </com.skyfishjy.library.RippleBackground>
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/recorded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/recode_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:drawableRight="@mipmap/play"
+            android:gravity="center_vertical"
+            android:text="Record 1"
+            android:textColor="@color/DarkGrey"
+            android:textSize="19sp"
+            android:visibility="gone" />
+
+
+        <TextView
+            android:id="@+id/recode_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:drawableRight="@mipmap/play"
+            android:gravity="center_vertical"
+            android:text="Record 2"
+            android:textColor="@color/DarkGrey"
+            android:textSize="19sp"
+            android:visibility="gone" />
+
+
+        <TextView
+            android:id="@+id/recode_three"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:drawableRight="@mipmap/play"
+            android:gravity="center_vertical"
+            android:text="Record 3"
+            android:textColor="@color/DarkGrey"
+            android:textSize="19sp"
+            android:visibility="gone" />
+
+
+    </LinearLayout>
+</RelativeLayout>

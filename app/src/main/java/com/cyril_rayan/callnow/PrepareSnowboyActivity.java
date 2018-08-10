@@ -108,9 +108,8 @@ public class PrepareSnowboyActivity extends AppCompatActivity {
                 try {
                     generateNewModel();
                     Toast.makeText(PrepareSnowboyActivity.this, "Successfully download!", Toast.LENGTH_LONG).show();
-
-                    
-
+                    Intent intent =new Intent(PrepareSnowboyActivity.this, WelcomeScreen.class);
+                    startActivity(intent);
                     finish();
                 } catch (IOException e) {
                     e.printStackTrace();

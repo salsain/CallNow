@@ -4,136 +4,156 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="#5B86E2"
     tools:context="com.cyril_rayan.callnow.MainFragment">
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="8dp">
 
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="@dimen/large2"
-                android:layout_marginTop="50dp"
-                android:gravity="center_horizontal"
-                android:src="@drawable/logo_text"
-                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/makeCallstext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:text="Make Calls"
+                android:textColor="@color/white"
+                android:textSize="28dp"
+                android:textStyle="bold" />
+
+            <com.skyfishjy.library.RippleBackground xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/makeCallsButton"
+                android:layout_below="@+id/makeCallstext"
+                app:rb_color="@color/colorPrimary"
+                app:rb_duration="6000"
+                app:rb_radius="54dp"
+                app:rb_rippleAmount="4"
+                app:rb_scale="6">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="15dp"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:padding="15dp"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/call_now"
+                    android:textSize="@dimen/text_size_main" />
+
+            </com.skyfishjy.library.RippleBackground>
+
+
+
+
+
+            <Button
+                android:id="@+id/makeCallsButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_above="@+id/bottom_btn_ll"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                android:text="Make Call"
+                android:textColor="@color/blue_btn"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
+                android:id="@+id/bottom_btn_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/help"
                 android:layout_centerInParent="true"
-                android:layout_marginBottom="30dp"
-                android:layout_marginTop="50dp"
-                android:background="#ffffff"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:weightSum="5">
+                android:orientation="horizontal"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                android:weightSum="2">
 
-                <ImageButton
-                    android:id="@+id/runUserSelectContactsButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_marginBottom="@dimen/button_margin_text"
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="#00000000"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/select_contracts"
-                    android:textSize="@dimen/text_size_main" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/button_margin"
                     android:gravity="center"
-                    android:text="Select Contacts" />
+                    android:orientation="horizontal">
 
-                <ImageButton
-                    android:id="@+id/runManualAddContactsButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_marginBottom="@dimen/button_margin_text"
+                    <TextView
+                        android:id="@+id/runManualAddContactsButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_margin="1dp"
+                        android:drawableLeft="@mipmap/phone_cntct"
+                        android:drawablePadding="8dp"
+                        android:gravity="center"
+                        android:text="Phone\nContacts"
+                        android:textColor="@drawable/white_text_selector"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="8dp"
+                    android:background="@color/white" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="#00000000"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/add_contacts"
-                    android:textSize="@dimen/text_size_main" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/button_margin"
                     android:gravity="center"
-                    android:text="Add Contacts for call" />
+                    android:orientation="horizontal">
 
-                <ImageButton
-                    android:id="@+id/runImportCRMContactsButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_marginBottom="@dimen/button_margin_text"
-                    android:layout_weight="1"
-                    android:background="#00000000"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/import_crm_contact"
-                    android:textSize="@dimen/text_size_main" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/button_margin"
-                    android:gravity="center"
-                    android:text="Import CRM Contacts" />
-
-                <ImageButton
-                    android:id="@+id/makeCallsButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginBottom="@dimen/button_margin_text"
-                    android:layout_weight="1"
-                    android:background="#00000000"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/voicetip"
-                    android:textSize="@dimen/text_size_main" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/button_margin"
-                    android:gravity="center"
-                    android:text="Make Calls" />
-
-                <ImageButton
-                  android:id="@+id/autoConnectToZoom"
-                  android:layout_width="match_parent"
-                  android:layout_height="0dp"
-                  android:layout_marginBottom="@dimen/button_margin_text"
-                  android:layout_weight="1"
-                  android:background="#00000000"
-                  android:scaleType="fitCenter"
-                  android:src="@drawable/voicetip"
-                  android:textSize="@dimen/text_size_main" />
-
-                <TextView
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_marginBottom="@dimen/button_margin"
-                  android:gravity="center"
-                  android:text="AutoConnect to Zoom" />
-
-
-                <TextView
-                    android:id="@+id/makeCallsText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="We call to next contacts:"
-                    android:visibility="gone" />
+                    <TextView
+                        android:id="@+id/runImportCRMContactsButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_margin="1dp"
+                        android:drawableLeft="@mipmap/salesforce_cntct"
+                        android:drawablePadding="8dp"
+                        android:gravity="center"
+                        android:text="Salesforce Contacts"
+                        android:textColor="@drawable/white_text_selector"
+                        android:textSize="18sp" />
+                </LinearLayout>
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/makeCallsText"
+                android:gravity="center"
+                android:text="Help"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/makeCallsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="Its a articular call goes to voicemail you can say End Call and the CallNow App will end the call and go to the next call if there is one.\n\nThis is to keep you safe as you driving."
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:visibility="visible" />
 
         </RelativeLayout>
 
@@ -142,7 +162,7 @@
             layout="@layout/select_contacts_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="invisible" />
+            android:visibility="gone" />
     </RelativeLayout>
 
 

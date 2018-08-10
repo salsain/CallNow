@@ -3,6 +3,8 @@ package com.cyril_rayan.callnow;
 import android.app.Application;
 import android.support.multidex.MultiDexApplication;
 
+import com.splunk.mint.Mint;
+
 /**
  * Created by Айрат on 04.06.2017.
  */
@@ -19,5 +21,6 @@ public class MainApplication extends MultiDexApplication {
     public void onCreate() {
         instance = this;
         super.onCreate();
+        Mint.initAndStartSession(getApplicationContext(), "6ca4b144");
     }
 }

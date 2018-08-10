@@ -12,15 +12,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import android.widget.Toast;
-import butterknife.BindView;
+//import butterknife.BindView;
 import com.cyril_rayan.callnow.login.utils.DialogUtil;
 import com.cyril_rayan.callnow.login.utils.KeyboardUtil;
 import com.cyril_rayan.callnow.login.webservicedetails.APIService;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import butterknife.ButterKnife;
+//import butterknife.ButterKnife;
 import com.cyril_rayan.callnow.R;
+
+import butterknife.BindView;
 
 /**
  * ForgetPasswordFr.java - a class for demonstrating Forget password screen.
@@ -31,21 +33,28 @@ import com.cyril_rayan.callnow.R;
  * @since 21/12/15.
  */
 public class ForgetPasswordFr  extends Fragment implements View.OnClickListener {
-    @BindView(R.id.backIv)
+//    @BindView(R.id.backIv)
     ImageView mBackIv;
-    @BindView(R.id.sendBtn)
+//    @BindView(R.id.sendBtn)
     Button mBtnSend;
-    @BindView(R.id.email_et)
+//    @BindView(R.id.email_et)
     EditText mEmail_et;
     String mUserStr;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.forget_password_fragment, null);
-        ButterKnife.bind(this,view);
+//        ButterKnife.bind(this,view);
         mBackIv.setOnClickListener(this);
+        setup(view);
         mBtnSend.setOnClickListener(this);
         return view;
+    }
+
+    private void setup(View view) {
+        mBackIv = view.findViewById(R.id.backIv);
+        mBtnSend = view.findViewById(R.id.sendBtn);
+        mEmail_et = view.findViewById(R.id.email_et);
     }
 
     @Override

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 /**
@@ -67,7 +68,8 @@ public class InfoFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_info, container, false);
-
+        TextView headerTv = ((TextView) view.findViewById(R.id.txtToolbarTitle));
+        headerTv.setText("Info");
         Button enableMoreCallFeature = (Button) view.findViewById(R.id.runSubscriptions);
         enableMoreCallFeature.setOnClickListener(new View.OnClickListener() {
             @Override

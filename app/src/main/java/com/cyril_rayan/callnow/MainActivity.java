@@ -24,7 +24,7 @@ import com.google.android.gms.location.ActivityRecognition;
 import com.google.android.gms.location.DetectedActivity;
 import com.cyril_rayan.callnow.R;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     TextView userActivityTextView;
     private MainFragment mainFragment;
@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     android.support.v4.app.FragmentManager mFragmentManager;
 
     private AdView mAdView;
+    private TextView callNowTab, infoTab, modelTab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,33 +46,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mInfoFragment = new InfoFragment();
         mModelFragment = new ModelFragment();
 
-        mFragmentManager.beginTransaction().add(R.id.mainLl, mainFragment).commit();
+        mFragmentManager.beginTransaction().add(R.id.mainLl, mInfoFragment).commit();
 
-        TextView callNowTab =  (TextView)findViewById(R.id.callNowTab);
-        TextView infoTab = (TextView)findViewById(R.id.infoTab);
-        TextView modelTab = (TextView)findViewById(R.id.modelTab);
+        callNowTab = (TextView) findViewById(R.id.callNowTab);
+        infoTab = (TextView) findViewById(R.id.infoTab);
+        modelTab = (TextView) findViewById(R.id.modelTab);
 
+        infoTab.setSelected(true);
         callNowTab.setOnClickListener(this);
         infoTab.setOnClickListener(this);
         modelTab.setOnClickListener(this);
 
-        userActivityTextView = (TextView)findViewById(R.id.userActivityTextView);
+        userActivityTextView = (TextView) findViewById(R.id.userActivityTextView);
 
         initGoogleApiUpdateActivity();
 
         prepareAd();
     }
 
-    void prepareAd(){
+    void prepareAd() {
         mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
-            .build();
+                .build();
         mAdView.loadAd(adRequest);
     }
 
     void updateAdVisiblity() {
         if (mAdView != null)
-            mAdView.setVisibility(StaticMemory.getInstance().isPayVersion() ? View.GONE : View.VISIBLE );
+            mAdView.setVisibility(StaticMemory.getInstance().isPayVersion() ? View.GONE : View.VISIBLE);
     }
 
     @Override
@@ -113,21 +115,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         //disableText();
         Fragment currentFragment = mFragmentManager.findFragmentById(R.id.mainLl);
-
+        callNowTab.setSelected(false);
+        infoTab.setSelected(false);
+        modelTab.setSelected(false);
         switch (v.getId()) {
             case R.id.callNowTab:
-                if(!(currentFragment instanceof MainFragment)){
+                if (!(currentFragment instanceof MainFragment)) {
+                    callNowTab.setSelected(true);
                     mFragmentManager.beginTransaction().replace(R.id.mainLl, mainFragment).commit();
                 }
                 break;
 
             case R.id.infoTab:
-                if(!(currentFragment instanceof InfoFragment)){
+                if (!(currentFragment instanceof InfoFragment)) {
+                    infoTab.setSelected(true);
                     mFragmentManager.beginTransaction().replace(R.id.mainLl, mInfoFragment).commit();
                 }
                 break;
             case R.id.modelTab:
-                if(!(currentFragment instanceof ModelFragment)) {
+                if (!(currentFragment instanceof ModelFragment)) {
+                    modelTab.setSelected(true);
                     mFragmentManager.beginTransaction().replace(R.id.mainLl, mModelFragment).commit();
                 }
                 break;
@@ -151,9 +158,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        Intent intent = new Intent( this, ActivityRecognizedService.class );
-        PendingIntent pendingIntent = PendingIntent.getService( this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT );
-        ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates( mApiClient, ActivityRecognisionPereod, pendingIntent );
+        Intent intent = new Intent(this, ActivityRecognizedService.class);
+        PendingIntent pendingIntent = PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates(mApiClient, ActivityRecognisionPereod, pendingIntent);
 
         LocalBroadcastManager.getInstance(this).registerReceiver(
                 mMessageReceiver, new IntentFilter("DetectedActivityUpdates"));
@@ -175,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void UpdateActivityTextView(DetectedActivity activity) {
         String activityText = null;
 
-        switch( activity.getType() ) {
+        switch (activity.getType()) {
             case DetectedActivity.IN_VEHICLE: {
                 activityText = "IN_VEHICLE";
                 break;
@@ -210,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
-        userActivityTextView.setText(activityText+ "("+activity.getConfidence()+"%)"+"\nupdate:"+index++);
+        userActivityTextView.setText(activityText + "(" + activity.getConfidence() + "%)" + "\nupdate:" + index++);
     }
 
     @Override

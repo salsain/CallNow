@@ -1,11 +1,15 @@
 package com.cyril_rayan.callnow.login;
 
 import static com.cyril_rayan.callnow.login.Constants.SHRD_KEY_LOGGEDIN;
+import static us.zoom.androidlib.util.ZMAsyncTask.init;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -17,21 +21,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import butterknife.BindView;
+//import butterknife.BindView;
 
 import com.cyril_rayan.callnow.PrepareSnowboyActivity;
 import com.cyril_rayan.callnow.R;
 
-import com.cyril_rayan.callnow.WelcomeScreen;
 import com.cyril_rayan.callnow.login.utils.DialogUtil;
 import com.cyril_rayan.callnow.login.utils.KeyboardUtil;
 import com.cyril_rayan.callnow.login.utils.SharedpreferenceUtility;
 import com.cyril_rayan.callnow.login.utils.Validation;
 import com.cyril_rayan.callnow.login.webservicedetails.APIService;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import butterknife.ButterKnife;
 
 /**
  * LoginFragment.java - a class for demonstrating the Login Screen.
@@ -44,26 +47,36 @@ import butterknife.ButterKnife;
 public class LoginFragment extends Fragment implements View.OnClickListener {
 
     private String mUserStr, mPassStr;
-    @BindView(R.id.userId_et)
+    //    @BindView(R.id.userId_et)
     EditText mUserIdEt;
-    @BindView(R.id.password_et)
+    //    @BindView(R.id.password_et)
     EditText mPasswordEt;
-    @BindView(R.id.login_btn)
+    //    @BindView(R.id.login_btn)
     Button mLoginBtn;
-    @BindView(R.id.signupTv)
+    //    @BindView(R.id.signupTv)
     TextView mSignUpTv;
-    @BindView(R.id.forgetTv)
+    //  @BindView(R.id.forgetTv)
     TextView mForgetTv;
-    protected Context context=getActivity();
+    protected Context context = getActivity();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.login_fragment, null);
-        ButterKnife.bind(this, view);
+//        ButterKnife.bind(this, view);
+        setup(view);
         mLoginBtn.setOnClickListener(this);
         mSignUpTv.setOnClickListener(this);
         mForgetTv.setOnClickListener(this);
         return view;
+    }
+
+    private void setup(View view) {
+        mUserIdEt = view.findViewById(R.id.userId_et);
+        mPasswordEt = view.findViewById(R.id.password_et);
+        mLoginBtn = view.findViewById(R.id.login_btn);
+        mSignUpTv = view.findViewById(R.id.signupTv);
+        mForgetTv = view.findViewById(R.id.forgetTv);
+
     }
 
     /**
@@ -72,7 +85,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private void loginService() {
         mUserStr = mUserIdEt.getText().toString().trim();
         mPassStr = mPasswordEt.getText().toString().trim();
-       
+
         if (mUserStr == null || mUserStr.equalsIgnoreCase("")) {
             mUserIdEt.setError("Username Required");
             return;
@@ -87,7 +100,17 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             return;
         } else
             mUserIdEt.setError(null);
-        TelephonyManager tm = (TelephonyManager)getActivity().getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
+        TelephonyManager tm = (TelephonyManager) getActivity().getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         String android_id = tm.getDeviceId();
         if (android_id == null) android_id = "AndroidEmulatorDeviceID";
         SharedpreferenceUtility.getInstance(getActivity()).
@@ -104,19 +127,17 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     Log.v("JSONObject", json.toString());
 
                     try {
-                        if("200".equalsIgnoreCase(json.getString("responseCode"))){
+                        if ("200".equalsIgnoreCase(json.getString("responseCode"))) {
                             Toast.makeText(getActivity(), "Login successfully", Toast.LENGTH_SHORT).show();
                             SharedpreferenceUtility.getInstance(getActivity()).
-                                    putString("username",mUserStr);
+                                    putString("username", mUserStr);
                             SharedpreferenceUtility.getInstance(getActivity()).
-                                    putString("password",mPassStr);
-                            SharedpreferenceUtility.getInstance(getActivity()).putBoolean(SHRD_KEY_LOGGEDIN,true);
+                                    putString("password", mPassStr);
+                            SharedpreferenceUtility.getInstance(getActivity()).putBoolean(SHRD_KEY_LOGGEDIN, true);
 
                             runRegularActivity();
 
-                        }
-
-                        else{
+                        } else {
                             DialogUtil.showOkListenerDialog(getActivity(), "Tip Now", json.getString("message"), false, new View.OnClickListener() {
 
                                 @Override
@@ -145,20 +166,17 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login_btn:
-                   if(LoginFrActivity.permition==false)
-                   {
-                       DialogUtil.showOkListenerDialog(getActivity(), "Tip Now", "You need to allow permition", false, new View.OnClickListener() {
-                           @Override
-                           public void onClick(View view) {
-                               Dialog dialog = (Dialog) view.getTag();
-                               dialog.dismiss();
-                           }
-                       });
-                   }
-                else
-                   {
-                       loginService();
-                   }
+                if (LoginFrActivity.permition == false) {
+                    DialogUtil.showOkListenerDialog(getActivity(), "Tip Now", "You need to allow permition", false, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Dialog dialog = (Dialog) view.getTag();
+                            dialog.dismiss();
+                        }
+                    });
+                } else {
+                    loginService();
+                }
                 KeyboardUtil.hideSoftKeyboard(mLoginBtn);
                 break;
             case R.id.signupTv:
