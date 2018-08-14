@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 
+import com.cyril_rayan.callnow.MainActivity;
 import com.cyril_rayan.callnow.R;
 import com.cyril_rayan.callnow.WelcomeScreen;
 import com.cyril_rayan.callnow.login.utils.SharedpreferenceUtility;
@@ -34,7 +35,7 @@ public class SplashScreen extends Activity {
             @Override
             public void run() {
                 if(SharedpreferenceUtility.getInstance(SplashScreen.this).getBoolean(Constants.SHRD_KEY_LOGGEDIN)){
-                    Intent intent =new Intent(SplashScreen.this, WelcomeScreen.class);
+                    Intent intent =new Intent(SplashScreen.this, MainActivity.class);
                     SplashScreen.this.startActivity(intent);
                     finish();
                 }else{

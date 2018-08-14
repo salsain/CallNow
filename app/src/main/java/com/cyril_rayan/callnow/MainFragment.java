@@ -42,12 +42,12 @@ import ai.kitt.snowboy.MsgEnum;
 
 public class MainFragment extends Fragment {
 
-//    View runUserSelectContactsButton;
+    //    View runUserSelectContactsButton;
     View runManualAddContactsButton;
     View runImportCRMContactsButton;
 
     View makeCallsButton;
-//    View autoConnectToZoom;
+    //    View autoConnectToZoom;
     TextView makeCallsText;
 
     //calling
@@ -138,8 +138,7 @@ public class MainFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        rippleBackground = (RippleBackground) getView().findViewById(R.id.content);
-
+        rippleBackground = (RippleBackground) getView().findViewById(R.id.contents);
         rippleBackground.startRippleAnimation();
         makeCallsButton = getView().findViewById(R.id.makeCallsButton);
         makeCallsButton.setOnClickListener(new View.OnClickListener() {
@@ -158,7 +157,7 @@ public class MainFragment extends Fragment {
         runManualAddContactsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                runManualAddContacts();
+                runUserSelectContacts(true);
             }
         });
 

@@ -44,7 +44,10 @@ public class ForgetPasswordFr  extends Fragment implements View.OnClickListener 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.forget_password_fragment, null);
-//        ButterKnife.bind(this,view);
+        mBackIv=view.findViewById(R.id.backIv);
+        mBtnSend=view.findViewById(R.id.sendBtn);
+        mEmail_et=view.findViewById(R.id.email_et);
+
         mBackIv.setOnClickListener(this);
         setup(view);
         mBtnSend.setOnClickListener(this);

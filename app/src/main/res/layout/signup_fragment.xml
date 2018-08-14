@@ -9,12 +9,25 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/login_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/arrow"
+            android:paddingBottom="12dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="7dp"
+            android:textColor="@color/blue_txt"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="50dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="20dp"
             android:src="@mipmap/big_logo" />
 
 
@@ -115,18 +128,7 @@
                 android:src="@mipmap/icon_32_left_arrow_selected"
                 android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/login_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="12dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingTop="7dp"
-                android:text="Back to Login"
-                android:textColor="@color/blue_txt"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+
         </LinearLayout>
     </LinearLayout>
 

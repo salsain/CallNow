@@ -98,7 +98,9 @@ public class ModelFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onStop() {
         super.onStop();
-        rippleBackground.stopRippleAnimation();
+        if (rippleBackground != null) {
+            rippleBackground.stopRippleAnimation();
+        }
         try {
             stopRecording();
         } catch (Exception e) {
@@ -109,7 +111,9 @@ public class ModelFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        rippleBackground.startRippleAnimation();
+        if (rippleBackground != null) {
+            rippleBackground.startRippleAnimation();
+        }
     }
 
 
@@ -162,6 +166,9 @@ public class ModelFragment extends Fragment implements View.OnClickListener {
                         if ((currentRecording + 1) <= 3) {
                             ++currentRecording;
                             record_file.setText(setFileName(currentRecording));
+                        } else {
+                            currentRecording = 1;
+                            record_file.setText(setFileName(currentRecording));
                         }
                         genModel.setVisibility(View.VISIBLE);
                     }
@@ -192,8 +199,18 @@ public class ModelFragment extends Fragment implements View.OnClickListener {
 
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                initialize(view);
+            }
+        }, 100);
+
+    }
+
+    private void initialize(View view) {
         rippleBackground = (RippleBackground) view.findViewById(R.id.content);
         rippleBackground.startRippleAnimation();
         record_file = (TextView) view.findViewById(R.id.record_file);
@@ -265,7 +282,7 @@ public class ModelFragment extends Fragment implements View.OnClickListener {
     }
 
     public void playVoice(final String filename, final TextView textView) {
-        textView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.mipmap.pause, 0);
+        textView.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.pause, 0, 0, 0);
         if (playbackThread.playing())
             playbackThread.stopPlayback();
 
@@ -274,7 +291,7 @@ public class ModelFragment extends Fragment implements View.OnClickListener {
             public void onMarkerReached(AudioTrack track) {
                 int audio = track.getAudioFormat();
                 playbackThread.stopPlayback();
-                textView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.mipmap.play, 0);
+                textView.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.play, 0, 0, 0);
             }
 
             @Override

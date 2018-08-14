@@ -13,6 +13,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -30,11 +31,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MainFragment mainFragment;
     private InfoFragment mInfoFragment;
     private ModelFragment mModelFragment;
-
+    public final int MENU_CALL_NOW = 1;
+    public final int MENU_VOICE = 2;
+    public final int MENU_INFO = 3;
     android.support.v4.app.FragmentManager mFragmentManager;
 
     private AdView mAdView;
     private TextView callNowTab, infoTab, modelTab;
+    private LinearLayout bottomTabLl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,23 +49,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mainFragment = new MainFragment();
         mInfoFragment = new InfoFragment();
         mModelFragment = new ModelFragment();
+        initialized();
+        callFragment(MENU_CALL_NOW);
+//        initGoogleApiUpdateActivity();
+//        prepareAd();
+    }
 
-        mFragmentManager.beginTransaction().add(R.id.mainLl, mInfoFragment).commit();
-
+    private void initialized() {
+        bottomTabLl = (LinearLayout) findViewById(R.id.bottomTabLl);
+        userActivityTextView = (TextView) findViewById(R.id.userActivityTextView);
         callNowTab = (TextView) findViewById(R.id.callNowTab);
         infoTab = (TextView) findViewById(R.id.infoTab);
         modelTab = (TextView) findViewById(R.id.modelTab);
 
-        infoTab.setSelected(true);
         callNowTab.setOnClickListener(this);
         infoTab.setOnClickListener(this);
         modelTab.setOnClickListener(this);
-
-        userActivityTextView = (TextView) findViewById(R.id.userActivityTextView);
-
-        initGoogleApiUpdateActivity();
-
-        prepareAd();
     }
 
     void prepareAd() {
@@ -73,31 +76,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     void updateAdVisiblity() {
         if (mAdView != null)
-            mAdView.setVisibility(StaticMemory.getInstance().isPayVersion() ? View.GONE : View.VISIBLE);
+            mAdView.setVisibility(StaticMemory.getInstance().isPayVersion() ? View.GONE : View.GONE);
     }
 
     @Override
     public void onPause() {
-        if (mAdView != null) {
-            mAdView.pause();
-        }
+//        if (mAdView != null) {
+//            mAdView.pause();
+//        }
         super.onPause();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (mAdView != null) {
-            mAdView.resume();
-        }
-        updateAdVisiblity();
+//        if (mAdView != null) {
+//            mAdView.resume();
+//        }
+//        updateAdVisiblity();
     }
 
     @Override
     public void onDestroy() {
-        if (mAdView != null) {
-            mAdView.destroy();
-        }
+//        if (mAdView != null) {
+//            mAdView.destroy();
+//        }
         super.onDestroy();
     }
 
@@ -115,28 +118,64 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         //disableText();
         Fragment currentFragment = mFragmentManager.findFragmentById(R.id.mainLl);
-        callNowTab.setSelected(false);
-        infoTab.setSelected(false);
-        modelTab.setSelected(false);
         switch (v.getId()) {
             case R.id.callNowTab:
                 if (!(currentFragment instanceof MainFragment)) {
-                    callNowTab.setSelected(true);
-                    mFragmentManager.beginTransaction().replace(R.id.mainLl, mainFragment).commit();
+                    callFragment(MENU_CALL_NOW);
                 }
                 break;
 
             case R.id.infoTab:
                 if (!(currentFragment instanceof InfoFragment)) {
-                    infoTab.setSelected(true);
-                    mFragmentManager.beginTransaction().replace(R.id.mainLl, mInfoFragment).commit();
+                    callFragment(MENU_INFO);
                 }
                 break;
             case R.id.modelTab:
                 if (!(currentFragment instanceof ModelFragment)) {
-                    modelTab.setSelected(true);
-                    mFragmentManager.beginTransaction().replace(R.id.mainLl, mModelFragment).commit();
+                    callFragment(MENU_VOICE);
                 }
+                break;
+        }
+    }
+
+    private void callFragment(int menu_type) {
+        callNowTab.setSelected(false);
+        infoTab.setSelected(false);
+        modelTab.setSelected(false);
+        switch (menu_type) {
+            case MENU_CALL_NOW:
+                bottomTabLl.setBackgroundColor(getResources().getColor(R.color.dark_blue_bg));
+                callNowTab.setTextColor(getResources().getColor(R.color.ysel));
+                callNowTab.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.mipmap.call_hover), null, null, null);
+                infoTab.setTextColor(getResources().getColor(R.color.yunsel));
+                infoTab.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.mipmap.info_white), null, null, null);
+                modelTab.setTextColor(getResources().getColor(R.color.yunsel));
+                modelTab.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.mipmap.voice_white), null, null, null);
+                callNowTab.setSelected(true);
+                mFragmentManager.beginTransaction().replace(R.id.mainLl, mainFragment).commit();
+                break;
+
+            case MENU_INFO:
+                bottomTabLl.setBackgroundColor(getResources().getColor(R.color.white));
+                callNowTab.setTextColor(getResources().getColor(R.color.unsel));
+                callNowTab.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.mipmap.call_unsel), null, null, null);
+                infoTab.setTextColor(getResources().getColor(R.color.sel));
+                infoTab.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.mipmap.info_sel), null, null, null);
+                modelTab.setTextColor(getResources().getColor(R.color.unsel));
+                modelTab.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.mipmap.voice_unsel), null, null, null);
+                infoTab.setSelected(true);
+                mFragmentManager.beginTransaction().replace(R.id.mainLl, mInfoFragment).commit();
+                break;
+            case MENU_VOICE:
+                bottomTabLl.setBackgroundColor(getResources().getColor(R.color.white));
+                callNowTab.setTextColor(getResources().getColor(R.color.unsel));
+                callNowTab.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.mipmap.call_unsel), null, null, null);
+                infoTab.setTextColor(getResources().getColor(R.color.unsel));
+                infoTab.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.mipmap.info_unsel), null, null, null);
+                modelTab.setTextColor(getResources().getColor(R.color.sel));
+                modelTab.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.mipmap.voice_sel), null, null, null);
+                modelTab.setSelected(true);
+                mFragmentManager.beginTransaction().replace(R.id.mainLl, mModelFragment).commit();
                 break;
         }
     }

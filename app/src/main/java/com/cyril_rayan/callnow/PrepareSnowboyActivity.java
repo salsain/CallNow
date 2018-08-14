@@ -21,13 +21,17 @@ import android.util.Xml;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.common.utility.CountDownAnimation;
 import com.cyril_rayan.callnow.login.LoginFrActivity;
 import com.cyril_rayan.callnow.login.utils.DialogUtil;
 import com.cyril_rayan.callnow.login.utils.SharedpreferenceUtility;
 import com.cyril_rayan.callnow.login.webservicedetails.APIService;
+import com.skyfishjy.library.RippleBackground;
 import com.zipow.videobox.LoginActivity;
 
 import org.json.JSONException;
@@ -52,20 +56,27 @@ import butterknife.OnClick;
 //import retrofit2.Callback;
 //import retrofit2.Response;
 
-public class PrepareSnowboyActivity extends AppCompatActivity {
+public class PrepareSnowboyActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = PrepareSnowboyActivity.class.getSimpleName();
     private WavRecorder wavRecorder = null;
     private MediaPlayer player = new MediaPlayer();
     private PlaybackThread playbackThread = new PlaybackThread();
+    private RippleBackground rippleBackground;
+    private TextView mRecordOne, mRecordTwo, mRecordThree;
+    private TextView countdown_tv;
+    private ImageView genModel;
+    private TextView record_file;
+    private int currentRecording = 1;
+    private String currentFilePath = Constants.VOICE_FILE1;    /**/
 
-    public Handler handler = new Handler(){
+    public Handler handler = new Handler() {
         @Override
-        public void handleMessage(Message msg){
+        public void handleMessage(Message msg) {
             MsgEnum message = MsgEnum.getMsgEnum(msg.what);
-            switch (message){
+            switch (message) {
                 case MSG_ACTIVE:
-                    try{
+                    try {
                         player.reset();
                         player.setDataSource(Constants.DEFAULT_WORK_SPACE + File.separatorChar + "ding.wav");
                         player.prepare();
@@ -89,26 +100,22 @@ public class PrepareSnowboyActivity extends AppCompatActivity {
         }
     };
 
-    ImageButton start_record1, stop_record1, playback1;
-    ImageButton start_record2, stop_record2, playback2;
-    ImageButton start_record3, stop_record3, playback3;
-    Button generate_button;
+
+    ImageView generate_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prepare_snowboy);
-
-
-        generate_button = (Button)findViewById(R.id.button_generate);
-        generate_button.setOnClickListener(new View.OnClickListener()
-        {
+        initialize();
+        generate_button = (ImageView) findViewById(R.id.rightIv);
+        generate_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public  void onClick(View v){
+            public void onClick(View v) {
                 try {
                     generateNewModel();
                     Toast.makeText(PrepareSnowboyActivity.this, "Successfully download!", Toast.LENGTH_LONG).show();
-                    Intent intent =new Intent(PrepareSnowboyActivity.this, WelcomeScreen.class);
+                    Intent intent = new Intent(PrepareSnowboyActivity.this, WelcomeScreen.class);
                     startActivity(intent);
                     finish();
                 } catch (IOException e) {
@@ -116,126 +123,135 @@ public class PrepareSnowboyActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-        start_record1 = (ImageButton)findViewById(R.id.start_record1);
-        start_record1.setOnClickListener(new View.OnClickListener()
-        {
+        ((TextView) findViewById(R.id.imgBack)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startRecording(Constants.VOICE_FILE1);
-
-                start_record1.setVisibility(View.GONE);
-                stop_record1.setVisibility(View.VISIBLE);
-                playback1.setVisibility(View.GONE);
-            }
-        });
-
-        stop_record1 = (ImageButton)findViewById(R.id.stop_record1);
-        stop_record1.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                stopRecording();
-                start_record1.setVisibility(View.VISIBLE);
-                stop_record1.setVisibility(View.GONE);
-                playback1.setVisibility(View.VISIBLE);
-            }
-        });
-
-        playback1 = (ImageButton)findViewById(R.id.playback1);
-        playback1.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                playVoice(Constants.VOICE_FILE1);
-
-                start_record1.setVisibility(View.VISIBLE);
-                stop_record1.setVisibility(View.GONE);
-//              playback1.setVisibility(View.GONE);
+                Intent intent = new Intent(PrepareSnowboyActivity.this, WelcomeScreen.class);
+                startActivity(intent);
+                finish();
             }
         });
 
 
+    }
 
-        start_record2 = (ImageButton)findViewById(R.id.start_record2);
-        start_record2.setOnClickListener(new View.OnClickListener()
-        {
+    private void initialize() {
+        rippleBackground = (RippleBackground) findViewById(R.id.content);
+        rippleBackground.startRippleAnimation();
+        record_file = (TextView) findViewById(R.id.record_file);
+        record_file.setText(setFileName(currentRecording));
+        countdown_tv = (TextView) findViewById(R.id.countdown_tv);
+        countdown_tv.setVisibility(View.GONE);
+        genModel = (ImageView) findViewById(R.id.modelGen);
+        genModel.setVisibility(View.VISIBLE);
+        genModel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startRecording(Constants.VOICE_FILE2);
-
-                start_record2.setVisibility(View.GONE);
-                stop_record2.setVisibility(View.VISIBLE);
-                playback2.setVisibility(View.GONE);
+                startCountDown();
             }
         });
-
-        stop_record2 = (ImageButton)findViewById(R.id.stop_record2);
-        stop_record2.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                stopRecording();
-                start_record2.setVisibility(View.VISIBLE);
-                stop_record2.setVisibility(View.GONE);
-                playback2.setVisibility(View.VISIBLE);
-            }
-        });
-
-        playback2 = (ImageButton)findViewById(R.id.playback2);
-        playback2.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                playVoice(Constants.VOICE_FILE2);
-                start_record2.setVisibility(View.VISIBLE);
-                stop_record2.setVisibility(View.GONE);
-//              playback2.setVisibility(View.GONE);
-            }
-        });
-
-
-        start_record3 = (ImageButton)findViewById(R.id.start_record3);
-        start_record3.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                startRecording(Constants.VOICE_FILE3);
-
-                start_record3.setVisibility(View.GONE);
-                stop_record3.setVisibility(View.VISIBLE);
-                playback3.setVisibility(View.GONE);
-            }
-        });
-
-        stop_record3 = (ImageButton)findViewById(R.id.stop_record3);
-        stop_record3.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                stopRecording();
-                start_record3.setVisibility(View.VISIBLE);
-                stop_record3.setVisibility(View.GONE);
-                playback3.setVisibility(View.VISIBLE);
-            }
-        });
-
-        playback3 = (ImageButton)findViewById(R.id.playback3);
-        playback3.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                playVoice(Constants.VOICE_FILE3);
-                start_record3.setVisibility(View.VISIBLE);
-                stop_record3.setVisibility(View.GONE);
-//              playback3.setVisibility(View.GONE);
-            }
-        });
-
-
+//        try {
+//            generateNewModel();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        mRecordOne = (TextView) findViewById(R.id.recode_one);
+        mRecordTwo = (TextView) findViewById(R.id.recode_two);
+        mRecordThree = (TextView) findViewById(R.id.recode_three);
+        mRecordOne.setVisibility(View.GONE);
+        mRecordTwo.setVisibility(View.GONE);
+        mRecordThree.setVisibility(View.GONE);
+        mRecordOne.setOnClickListener(this);
+        mRecordTwo.setOnClickListener(this);
+        mRecordThree.setOnClickListener(this);
         checkVoiceFileExist();
+    }
 
+    private String setFileName(int currentRecording) {
+        String fileName = "";
+        switch (currentRecording) {
+            case 1:
+                fileName = "Record 1";
+                currentFilePath = Constants.VOICE_FILE1;
+                break;
+            case 2:
+                fileName = "Record 2";
+                currentFilePath = Constants.VOICE_FILE2;
+                break;
+            case 3:
+                fileName = "Record 3";
+                currentFilePath = Constants.VOICE_FILE3;
+                break;
+            default:
+
+        }
+        return fileName;
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.recode_one:
+                playVoice(Constants.VOICE_FILE1, mRecordOne);
+                break;
+            case R.id.recode_two:
+                playVoice(Constants.VOICE_FILE2, mRecordTwo);
+                break;
+            case R.id.recode_three:
+                playVoice(Constants.VOICE_FILE3, mRecordThree);
+                break;
+        }
+    }
+
+    public void playVoice(final String filename, final TextView textView) {
+        textView.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.pause, 0, 0, 0);
+        if (playbackThread.playing())
+            playbackThread.stopPlayback();
+
+        playbackThread.startPlayback(new AudioTrack.OnPlaybackPositionUpdateListener() {
+            @Override
+            public void onMarkerReached(AudioTrack track) {
+                int audio = track.getAudioFormat();
+                playbackThread.stopPlayback();
+                textView.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.play, 0, 0, 0);
+            }
+
+            @Override
+            public void onPeriodicNotification(AudioTrack track) {
+                //int audio = track.getAudioFormat();
+            }
+        }, filename);
+    }
+
+    private void startCountDown() {
+        countdown_tv.setVisibility(View.VISIBLE);
+        genModel.setVisibility(View.GONE);
+        countdown_tv.setText("Ready");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startRecording(currentFilePath);
+                CountDownAnimation countDownAnimation = new CountDownAnimation(countdown_tv, 5);
+                countDownAnimation.setCountDownListener(new CountDownAnimation.CountDownListener() {
+                    @Override
+                    public void onCountDownEnd(CountDownAnimation animation) {
+                        stopRecording();
+                        if ((currentRecording + 1) <= 3) {
+                            ++currentRecording;
+                            record_file.setText(setFileName(currentRecording));
+                        } else {
+                            currentRecording = 1;
+                            record_file.setText(setFileName(currentRecording));
+                        }
+                        genModel.setVisibility(View.VISIBLE);
+                    }
+                });
+                countDownAnimation.start();
+
+            }
+        }, 1000);
+///storage/emulated/0/callnow/EndCall1.pcm
     }
 
     public void startRecording(final String fileName) {
@@ -247,7 +263,7 @@ public class PrepareSnowboyActivity extends AppCompatActivity {
     }
 
     public void stopRecording() {
-        if (wavRecorder == null){
+        if (wavRecorder == null) {
             return;
         }
         wavRecorder.stopRecording();
@@ -255,33 +271,33 @@ public class PrepareSnowboyActivity extends AppCompatActivity {
 
     }
 
-    public void playVoice(final String filename){
+    public void playVoice(final String filename) {
         if (playbackThread.playing())
             playbackThread.stopPlayback();
 
         playbackThread.startPlayback(playBackListener, filename);
     }
 
-    public void checkVoiceFileExist(){
+    public void checkVoiceFileExist() {
         try {
             File file = new File(Constants.VOICE_FILE1);
             if (file.exists())
-                playback1.setVisibility(View.VISIBLE);
-        }catch (Exception e){
+                mRecordOne.setVisibility(View.VISIBLE);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         try {
             File file = new File(Constants.VOICE_FILE2);
             if (file.exists())
-                playback2.setVisibility(View.VISIBLE);
-        }catch (Exception e){
+                mRecordTwo.setVisibility(View.VISIBLE);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         try {
             File file = new File(Constants.VOICE_FILE3);
             if (file.exists())
-                playback3.setVisibility(View.VISIBLE);
-        }catch (Exception e){
+                mRecordThree.setVisibility(View.VISIBLE);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -300,30 +316,23 @@ public class PrepareSnowboyActivity extends AppCompatActivity {
         }
     };
 
-    private void onEndOfPlayBack() {
-        start_record1.setVisibility(View.VISIBLE);
-        stop_record1.setVisibility(View.GONE);
-        playback1.setVisibility(View.VISIBLE);
-        playback1.setEnabled(true);
-    }
-
 
     public void generateNewModel() throws IOException {
         wavRecorder = new WavRecorder(Constants.VOICE_FILE1);
         final byte[] data1 = playbackThread.readPCMData(Constants.VOICE_FILE1);
 
-        if (data1 == null){
+        if (data1 == null) {
             alertMessage("Check the Voice1 again!");
             return;
         }
 
         final byte[] data2 = playbackThread.readPCMData(Constants.VOICE_FILE2);
-        if (data2 == null){
+        if (data2 == null) {
             alertMessage("Check the Voice2 again!");
             return;
         }
         final byte[] data3 = playbackThread.readPCMData(Constants.VOICE_FILE3);
-        if (data3 == null){
+        if (data3 == null) {
             alertMessage("Check the Voice3 again!");
             return;
         }
@@ -334,19 +343,19 @@ public class PrepareSnowboyActivity extends AppCompatActivity {
         String vbuf2 = Base64.encodeToString(wavRecorder.AddWaveFileHeadertoBuffer(data2), Base64.NO_WRAP);
         String vbuf3 = Base64.encodeToString(wavRecorder.AddWaveFileHeadertoBuffer(data3), Base64.NO_WRAP);
 
-        byte[] response = ApiSnowBoy.requestModel(name, "en", "20_29", "M", "macbook microphone", vbuf1, vbuf2, vbuf3 );
+        byte[] response = ApiSnowBoy.requestModel(name, "en", "20_29", "M", "macbook microphone", vbuf1, vbuf2, vbuf3);
 
-        if (response == null){
+        if (response == null) {
             Log.e("Null message ", "Voice model request failed! Try again!");
-        }else{
+        } else {
             boolean ret = ApiSnowBoy.writeDataToFile(Constants.MODEL_PATH, Constants.NEW_MODEL, response);
-            if (ret){
+            if (ret) {
                 ApiSnowBoy.moveFile(Constants.MODEL_PATH, Constants.NEW_MODEL, Constants.DEFAULT_WORK_SPACE);
             }
         }
     }
 
-    public void alertMessage(String msg){
+    public void alertMessage(String msg) {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setMessage(msg);
         alert.setNeutralButton("OK", null);

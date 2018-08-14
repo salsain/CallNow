@@ -66,10 +66,10 @@
             android:layout_above="@+id/makeCallsButton"
             android:layout_below="@+id/makeCallstext"
             app:rb_color="@color/colorPrimary"
-            app:rb_duration="6000"
-            app:rb_radius="50dp"
-            app:rb_rippleAmount="4"
-            app:rb_scale="6">
+            app:rb_duration="5000"
+            app:rb_radius="40dp"
+            app:rb_rippleAmount="3"
+            app:rb_scale="4">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -112,18 +112,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:gravity="bottom"
+        android:gravity="bottom|center_horizontal"
         android:orientation="vertical"
         android:padding="8dp">
 
         <TextView
             android:id="@+id/recode_one"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:drawableRight="@mipmap/play"
-            android:gravity="center_vertical"
-            android:text="Record 1"
+            android:layout_marginBottom="7dp"
+            android:layout_marginTop="7dp"
+            android:drawableLeft="@mipmap/play"
+            android:drawablePadding="10dp"
+            android:gravity="center_horizontal"
+            android:text="Recorded 1"
             android:textColor="@color/DarkGrey"
             android:textSize="19sp"
             android:visibility="gone" />
@@ -131,12 +133,14 @@
 
         <TextView
             android:id="@+id/recode_two"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:drawableRight="@mipmap/play"
-            android:gravity="center_vertical"
-            android:text="Record 2"
+            android:layout_marginBottom="7dp"
+            android:layout_marginTop="7dp"
+            android:drawableLeft="@mipmap/play"
+            android:drawablePadding="10dp"
+            android:gravity="center_horizontal"
+            android:text="Recorded 2"
             android:textColor="@color/DarkGrey"
             android:textSize="19sp"
             android:visibility="gone" />
@@ -144,12 +148,14 @@
 
         <TextView
             android:id="@+id/recode_three"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:drawableRight="@mipmap/play"
-            android:gravity="center_vertical"
-            android:text="Record 3"
+            android:layout_marginBottom="7dp"
+            android:layout_marginTop="7dp"
+            android:drawableLeft="@mipmap/play"
+            android:drawablePadding="10dp"
+            android:gravity="center_horizontal"
+            android:text="Recorded 3"
             android:textColor="@color/DarkGrey"
             android:textSize="19sp"
             android:visibility="gone" />

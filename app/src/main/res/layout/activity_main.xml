@@ -31,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
+            android:visibility="gone"
             ads:adSize="BANNER"
             app:adUnitId="@string/banner_footer_ad_unit_id"></com.google.android.gms.ads.AdView>
 
@@ -39,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/white"
+            android:background="@color/dark_blue_bg"
             android:gravity="center"
             android:orientation="horizontal"
             android:weightSum="3">
@@ -56,35 +57,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_margin="1dp"
-                    android:drawableLeft="@drawable/call_now_selector"
+                    android:drawableLeft="@drawable/blue_call_now_selector"
                     android:drawablePadding="8dp"
                     android:gravity="center"
                     android:text="Make Call"
-                    android:textColor="@drawable/blue_text_selector" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="1px"
-                android:layout_height="20dp"
-                android:background="@color/colorPrimary" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/infoTab"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_margin="1dp"
-                    android:drawableLeft="@drawable/info_selector"
-                    android:drawablePadding="8dp"
-                    android:gravity="center"
-                    android:text="Info"
-                    android:textColor="@drawable/blue_text_selector" />
+                    android:textColor="@drawable/hover_text_selector"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <View
@@ -104,12 +82,40 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_margin="1dp"
-                    android:drawableLeft="@drawable/voice_selector"
+                    android:drawableLeft="@drawable/blue_voice_selector"
                     android:drawablePadding="8dp"
                     android:gravity="center"
-                    android:text="Voice "
-                    android:textColor="@drawable/blue_text_selector" />
+                    android:text="Voice Recorder"
+                    android:textColor="@drawable/hover_text_selector"
+                    android:textSize="12sp" />
             </LinearLayout>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="20dp"
+                android:background="@color/colorPrimary" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/infoTab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_margin="1dp"
+                    android:drawableLeft="@drawable/blue_info_selector"
+                    android:drawablePadding="8dp"
+                    android:gravity="center"
+                    android:text="Info"
+                    android:textColor="@drawable/hover_text_selector"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
         </LinearLayout>
 
     </LinearLayout>
@@ -122,7 +128,8 @@
         android:layout_alignParentTop="true"
         android:padding="10dp"
         android:text="UNKNOWN ACTIVITY"
-        android:textColor="@color/colorAccent" />
+        android:textColor="@color/colorAccent"
+        android:visibility="gone" />
 
 </RelativeLayout>
 

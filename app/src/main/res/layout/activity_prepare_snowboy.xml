@@ -6,185 +6,229 @@
     android:layout_height="match_parent"
     tools:context="com.cyril_rayan.callnow.PrepareSnowboyActivity">
 
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/white"
+        android:contentInsetEnd="0dp"
+        android:contentInsetRight="0dp"
+        android:elevation="15dp"
+        app:contentInsetEnd="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetStart="0dp">
+
+        <RelativeLayout
+            android:id="@+id/toolbar_rl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/imgBack"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:scaleType="center"
+                android:text="SKIP"
+                android:textColor="#2D8CFF"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/txtToolbarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/right_rl"
+                android:layout_toRightOf="@+id/imgBack"
+                android:gravity="center"
+                android:text="Title"
+                android:textAllCaps="true"
+                android:textColor="@color/DarkGrey"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:id="@+id/right_rl"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:id="@+id/rightIv"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="center"
+                    android:src="@drawable/zm_share_btn_pressed"
+                    android:visibility="visible" />
+            </LinearLayout>
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
     <TextView
         android:id="@+id/notation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="16dp"
+        android:padding="4dp"
         android:text="@string/snowboy_voice_prepare_hint"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <LinearLayout
-        android:layout_width="368dp"
+    <TextView
+        android:id="@+id/record_file"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/notation">
+        android:layout_marginTop="15dp"
+        android:gravity="center_horizontal"
+        android:text="Record 1"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/notation" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/record_file">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/recorded"
+            android:layout_below="@+id/text">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/effect" />
+
+            <com.skyfishjy.library.RippleBackground xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/makeCallsButton"
+                android:layout_below="@+id/makeCallstext"
+                app:rb_color="@color/colorPrimary"
+                app:rb_duration="5000"
+                app:rb_radius="40dp"
+                app:rb_rippleAmount="3"
+                app:rb_scale="4">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+
+                    <ImageView
+                        android:id="@+id/modelGen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_margin="15dp"
+                        android:layout_weight="1"
+                        android:background="#00000000"
+                        android:padding="15dp"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/record"
+                        android:textSize="@dimen/text_size_main" />
+
+                    <TextView
+                        android:id="@+id/countdown_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="15dp"
+                        android:gravity="center_vertical"
+                        android:text="Ready"
+                        android:textColor="@color/white"
+                        android:textSize="35sp"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+            </com.skyfishjy.library.RippleBackground>
+
+
+        </RelativeLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/recorded"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_margin="@dimen/activity_vertical_margin"
-            android:orientation="vertical">
+            android:layout_alignParentBottom="true"
+            android:gravity="bottom|center_horizontal"
+            android:orientation="vertical"
+            android:padding="8dp">
 
             <TextView
+                android:id="@+id/recode_one"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"
-                android:layout_marginRight="@dimen/activity_vertical_margin"
-                android:text="Voice1"
-                android:textAlignment="center" />
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"
+                android:drawableLeft="@mipmap/play"
+                android:drawablePadding="10dp"
+                android:gravity="center_horizontal"
+                android:text="Recorded 1"
+                android:textColor="@color/DarkGrey"
+                android:textSize="19sp"
+                android:visibility="gone" />
 
-            <ImageButton
-                android:id="@+id/start_record1"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="2dp"
-                android:background="#00000000"
-                android:scaleType="fitCenter"
-                android:src="@drawable/microphone"
-                android:text="@string/record_you_voice" />
-
-            <ImageButton
-                android:id="@+id/stop_record1"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="2dp"
-                android:layout_weight="8.31"
-                android:background="#00000000"
-                android:scaleType="fitCenter"
-                android:src="@drawable/stop_button"
-                android:text="stop" />
-
-            <ImageButton
-                android:id="@+id/playback1"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="5dp"
-                android:background="#00000000"
-                android:scaleType="fitCenter"
-                android:src="@drawable/play_button"
-                android:text="play" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_margin="@dimen/activity_vertical_margin"
-            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/recode_two"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"
-                android:layout_marginRight="@dimen/activity_vertical_margin"
-                android:text="Voice2"
-                android:textAlignment="center" />
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"
+                android:drawableLeft="@mipmap/play"
+                android:drawablePadding="10dp"
+                android:gravity="center_horizontal"
+                android:text="Recorded 2"
+                android:textColor="@color/DarkGrey"
+                android:textSize="19sp"
+                android:visibility="gone" />
 
-            <ImageButton
-                android:id="@+id/start_record2"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="2dp"
-                android:background="#00000000"
-                android:scaleType="fitCenter"
-                android:src="@drawable/microphone"
-                android:text="@string/record_you_voice" />
-
-            <ImageButton
-                android:id="@+id/stop_record2"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="2dp"
-                android:layout_weight="8.31"
-                android:background="#00000000"
-                android:scaleType="fitCenter"
-                android:src="@drawable/stop_button"
-                android:text="stop" />
-
-            <ImageButton
-                android:id="@+id/playback2"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="5dp"
-                android:background="#00000000"
-                android:scaleType="fitCenter"
-                android:src="@drawable/play_button"
-                android:text="play" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_margin="@dimen/activity_vertical_margin"
-            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/recode_three"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"
-                android:layout_marginRight="@dimen/activity_vertical_margin"
-                android:text="Voice3"
-                android:textAlignment="center" />
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"
+                android:drawableLeft="@mipmap/play"
+                android:drawablePadding="10dp"
+                android:gravity="center_horizontal"
+                android:text="Recorded 3"
+                android:textColor="@color/DarkGrey"
+                android:textSize="19sp"
+                android:visibility="gone" />
 
-            <ImageButton
-                android:id="@+id/start_record3"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="2dp"
-                android:background="#00000000"
-                android:scaleType="fitCenter"
-                android:src="@drawable/microphone"
-                android:text="@string/record_you_voice" />
 
-            <ImageButton
-                android:id="@+id/stop_record3"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="2dp"
-                android:layout_weight="8.31"
-                android:background="#00000000"
-                android:scaleType="fitCenter"
-                android:src="@drawable/stop_button"
-                android:text="stop" />
-
-            <ImageButton
-                android:id="@+id/playback3"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="5dp"
-                android:background="#00000000"
-                android:scaleType="fitCenter"
-                android:src="@drawable/play_button"
-                android:text="play" />
         </LinearLayout>
-
-    </LinearLayout>
+    </RelativeLayout>
 
     <Button
         android:id="@+id/button_generate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:gravity="center"
         android:drawableTop="@drawable/zm_share_btn_pressed"
+        android:gravity="center"
         android:text="Generate Model"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 
