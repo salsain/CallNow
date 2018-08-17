@@ -25,7 +25,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/imgBack"
+                android:id="@+id/skiptv"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:layout_alignParentLeft="true"
@@ -44,7 +44,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/right_rl"
-                android:layout_toRightOf="@+id/imgBack"
+                android:layout_toRightOf="@+id/skiptv"
                 android:gravity="center"
                 android:text="Title"
                 android:textAllCaps="true"

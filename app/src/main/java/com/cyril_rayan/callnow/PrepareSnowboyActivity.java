@@ -123,7 +123,7 @@ public class PrepareSnowboyActivity extends AppCompatActivity implements View.On
                 }
             }
         });
-        ((TextView) findViewById(R.id.imgBack)).setOnClickListener(new View.OnClickListener() {
+        (findViewById(R.id.skiptv)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PrepareSnowboyActivity.this, WelcomeScreen.class);
