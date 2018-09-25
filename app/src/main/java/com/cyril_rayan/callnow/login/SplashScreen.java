@@ -7,6 +7,8 @@ import android.os.Handler;
 import android.view.Window;
 
 import com.cyril_rayan.callnow.MainActivity;
+import com.cyril_rayan.callnow.PrepareSnowboyActivity;
+import com.cyril_rayan.callnow.PrepareSnowboyActivityCopy;
 import com.cyril_rayan.callnow.R;
 import com.cyril_rayan.callnow.WelcomeScreen;
 import com.cyril_rayan.callnow.login.utils.SharedpreferenceUtility;
@@ -27,6 +29,9 @@ public class SplashScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
         initializeHandler();
+//        Intent intent =new Intent(SplashScreen.this, PrepareSnowboyActivity.class);
+//        SplashScreen.this.startActivity(intent);
+//        finish();
     }
 
     private void initializeHandler() {

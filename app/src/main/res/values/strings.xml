@@ -73,6 +73,7 @@
 	
 	<string name="snowboy_voice_prepare_hint">This app used voice input, so record your voice so CallNow can detect your voice to do end the call \n\n Push the Play button and say "End Call" 3 times with a short 1 second wait after each time you say it.</string>
 	<string name="prepare_snowboy">  Click below button to record your voice and download new model.</string>
-    <string name="record_screen">Click on to record your voice to say \"End Call\" three times in interval of 05 seconds</string>
+    <string name="record_screen">Click on the Mic icon to say \"End Call\" once, for each of the 3 recordings
+</string>
     <string name="record_you_voice">start record</string>
 </resources>

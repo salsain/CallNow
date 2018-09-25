@@ -1,6 +1,7 @@
 package com.cyril_rayan.callnow;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioTrack;
@@ -122,9 +123,21 @@ public class ModelFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_model, container, false);
+        final View view = inflater.inflate(R.layout.fragment_model, container, false);
+        (view.findViewById(R.id.progressbar)).setVisibility(View.VISIBLE);
         TextView headerTv = ((TextView) view.findViewById(R.id.txtToolbarTitle));
         headerTv.setText("Call Now");
+//        final ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Detecting...",
+//                true);
+//        dialog.show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                (view.findViewById(R.id.progressbar)).setVisibility(View.GONE);
+//                dialog.dismiss();
+            }
+        }, 800);
+
 
         return view;
     }
@@ -133,15 +146,15 @@ public class ModelFragment extends Fragment implements View.OnClickListener {
         String fileName = "";
         switch (currentRecording) {
             case 1:
-                fileName = "Record 1";
+                fileName = "Recording 1";
                 currentFilePath = Constants.VOICE_FILE1;
                 break;
             case 2:
-                fileName = "Record 2";
+                fileName = "Recording 2";
                 currentFilePath = Constants.VOICE_FILE2;
                 break;
             case 3:
-                fileName = "Record 3";
+                fileName = "Recording 3";
                 currentFilePath = Constants.VOICE_FILE3;
                 break;
             default:

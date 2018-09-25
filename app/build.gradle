@@ -40,6 +40,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }
+        debug{
+            debuggable true
+        }
     }
     useLibrary 'org.apache.http.legacy'
     productFlavors {

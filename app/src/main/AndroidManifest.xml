@@ -187,6 +187,9 @@
         <activity android:name=".PrepareSnowboyActivity" android:label="Prepare SnowboyVoice">
 
         </activity>
+        <activity android:name=".PrepareSnowboyActivityCopy" android:label="Prepare SnowboyVoice">
+
+        </activity>
     </application>
 
 </manifest>

@@ -103,12 +103,14 @@ public class MainFragment extends Fragment {
         }
     };
     private RippleBackground rippleBackground;
+    private RippleBackground rippleBackgrounds;
 
 
     void resetSequence() {
         sequenceCalling = false;
         callContactSequenceIndex = 0;
     }
+
 
 
     void showToast(CharSequence msg) {
@@ -140,6 +142,8 @@ public class MainFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         rippleBackground = (RippleBackground) getView().findViewById(R.id.contents);
         rippleBackground.startRippleAnimation();
+//        rippleBackgrounds = (RippleBackground) getView().findViewById(R.id.contentss);
+//        rippleBackgrounds.startRippleAnimation();
         makeCallsButton = getView().findViewById(R.id.makeCallsButton);
         makeCallsButton.setOnClickListener(new View.OnClickListener() {
             @Override

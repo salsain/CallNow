@@ -9,28 +9,31 @@
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:padding="8dp">
+
+        <TextView
+            android:id="@+id/makeCallstext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="Make Call"
+            android:textColor="@color/white"
+            android:textSize="28dp"
+            android:textStyle="bold" />
 
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_below="@+id/makeCallstext"
+            android:layout_centerVertical="true"
+            android:gravity="center"
             android:orientation="vertical">
 
-
-            <TextView
-                android:id="@+id/makeCallstext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="15dp"
-                android:gravity="center"
-                android:text="Make Calls"
-                android:textColor="@color/white"
-                android:textSize="28dp"
-                android:textStyle="bold" />
 
             <com.skyfishjy.library.RippleBackground xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -38,12 +41,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@+id/makeCallsButton"
-                android:layout_below="@+id/makeCallstext"
-                app:rb_color="@color/colorPrimary"
-                app:rb_duration="6000"
-                app:rb_radius="54dp"
-                app:rb_rippleAmount="4"
-                app:rb_scale="6">
+                app:rb_color="#7c9fe7"
+                app:rb_duration="5000"
+                app:rb_radius="48dp"
+                app:rb_rippleAmount="3"
+                app:rb_scale="4"
+                app:rb_type="fillRipple">
 
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -96,10 +99,10 @@
                         android:layout_margin="1dp"
                         android:drawableLeft="@mipmap/phone_cntct"
                         android:drawablePadding="8dp"
-                        android:gravity="center"
+                        android:gravity="left|center_vertical"
                         android:text="Phone\nContacts"
                         android:textColor="@drawable/white_text_selector"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <View
@@ -122,34 +125,14 @@
                         android:layout_margin="1dp"
                         android:drawableLeft="@mipmap/salesforce_cntct"
                         android:drawablePadding="8dp"
-                        android:gravity="center"
-                        android:text="Salesforce Contacts"
+                        android:gravity="left|center_vertical"
+                        android:text="Salesforce\nContacts"
                         android:textColor="@drawable/white_text_selector"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/help"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/makeCallsText"
-                android:gravity="center"
-                android:text="Help"
-                android:textColor="@color/white"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/makeCallsText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:text="Its a articular call goes to voicemail you can say End Call and the CallNow App will end the call and go to the next call if there is one.\n\nThis is to keep you safe as you driving."
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:visibility="visible" />
 
         </RelativeLayout>
 
@@ -159,6 +142,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone" />
+
+
     </RelativeLayout>
 
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -46,7 +46,7 @@
                 android:layout_toLeftOf="@+id/right_rl"
                 android:layout_toRightOf="@+id/skiptv"
                 android:gravity="center"
-                android:text="Title"
+                android:text="Voice Recorder"
                 android:textAllCaps="true"
                 android:textColor="@color/DarkGrey"
                 android:textSize="18sp" />
@@ -79,28 +79,27 @@
         android:id="@+id/notation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+              android:layout_below="@+id/toolbar"
         android:padding="4dp"
         android:text="@string/snowboy_voice_prepare_hint"
-        android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/record_file"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/notation"
         android:layout_marginTop="15dp"
         android:gravity="center_horizontal"
         android:text="Record 1"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/notation" />
+        android:textStyle="bold" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toBottomOf="@+id/record_file">
+        android:layout_below="@+id/record_file">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -119,8 +118,6 @@
                 android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_above="@+id/makeCallsButton"
-                android:layout_below="@+id/makeCallstext"
                 app:rb_color="@color/colorPrimary"
                 app:rb_duration="5000"
                 app:rb_radius="40dp"
@@ -232,4 +229,4 @@
         app:layout_constraintBottom_toBottomOf="parent" />
 
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

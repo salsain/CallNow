@@ -28,9 +28,9 @@ import com.cyril_rayan.callnow.R;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     TextView userActivityTextView;
-    private MainFragment mainFragment;
-    private InfoFragment mInfoFragment;
-    private ModelFragment mModelFragment;
+//    private MainFragment mainFragment;
+//    private InfoFragment mInfoFragment;
+//    private ModelFragment mModelFragment;
     public final int MENU_CALL_NOW = 1;
     public final int MENU_VOICE = 2;
     public final int MENU_INFO = 3;
@@ -46,9 +46,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         mFragmentManager = this.getSupportFragmentManager();
-        mainFragment = new MainFragment();
-        mInfoFragment = new InfoFragment();
-        mModelFragment = new ModelFragment();
+//        mainFragment = new MainFragment();
+//        mInfoFragment = new InfoFragment();
+//        mModelFragment = new ModelFragment();
         initialized();
         callFragment(MENU_CALL_NOW);
 //        initGoogleApiUpdateActivity();
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 modelTab.setTextColor(getResources().getColor(R.color.yunsel));
                 modelTab.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.mipmap.voice_white), null, null, null);
                 callNowTab.setSelected(true);
-                mFragmentManager.beginTransaction().replace(R.id.mainLl, mainFragment).commit();
+                mFragmentManager.beginTransaction().replace(R.id.mainLl, new MainFragment()).commit();
                 break;
 
             case MENU_INFO:
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 modelTab.setTextColor(getResources().getColor(R.color.unsel));
                 modelTab.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.mipmap.voice_unsel), null, null, null);
                 infoTab.setSelected(true);
-                mFragmentManager.beginTransaction().replace(R.id.mainLl, mInfoFragment).commit();
+                mFragmentManager.beginTransaction().replace(R.id.mainLl, new InfoFragment()).commit();
                 break;
             case MENU_VOICE:
                 bottomTabLl.setBackgroundColor(getResources().getColor(R.color.white));
@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 modelTab.setTextColor(getResources().getColor(R.color.sel));
                 modelTab.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.mipmap.voice_sel), null, null, null);
                 modelTab.setSelected(true);
-                mFragmentManager.beginTransaction().replace(R.id.mainLl, mModelFragment).commit();
+                mFragmentManager.beginTransaction().replace(R.id.mainLl, new ModelFragment()).commit();
                 break;
         }
     }

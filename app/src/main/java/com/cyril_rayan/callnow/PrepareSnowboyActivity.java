@@ -150,11 +150,6 @@ public class PrepareSnowboyActivity extends AppCompatActivity implements View.On
                 startCountDown();
             }
         });
-//        try {
-//            generateNewModel();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         mRecordOne = (TextView) findViewById(R.id.recode_one);
         mRecordTwo = (TextView) findViewById(R.id.recode_two);
         mRecordThree = (TextView) findViewById(R.id.recode_three);
