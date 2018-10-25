@@ -1,11 +1,13 @@
 package com.cyril_rayan.callnow;
 
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -28,7 +30,7 @@ import com.cyril_rayan.callnow.R;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     TextView userActivityTextView;
-//    private MainFragment mainFragment;
+    //    private MainFragment mainFragment;
 //    private InfoFragment mInfoFragment;
 //    private ModelFragment mModelFragment;
     public final int MENU_CALL_NOW = 1;
@@ -133,6 +135,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.modelTab:
                 if (!(currentFragment instanceof ModelFragment)) {
                     callFragment(MENU_VOICE);
+                    final ProgressDialog mProgressDialog = ProgressDialog.show(MainActivity.this, "Please wait", "Long operation starts...", true);
+                    new Thread() {
+                        @Override
+                        public void run() {
+
+                            //Do long operation stuff here search stuff
+
+                            try {
+
+                                // code runs in a thread
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        mProgressDialog.dismiss();
+                                    }
+                                });
+                            } catch (final Exception ex) {
+
+                            }
+                        }
+                    }.start();
+
                 }
                 break;
         }

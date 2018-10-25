@@ -18,15 +18,10 @@ import com.cyril_rayan.callnow.R;
  */
 public class WhiteProgressDialog extends Dialog {
 
-	public WhiteProgressDialog(Context context, int msgResId) {
-		super(context);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		this.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-		setContentView(R.layout.white_progress_dialog);
-
-		TextView messageTv = (TextView) findViewById(R.id.message_tv);
-
-		messageTv.setVisibility(msgResId <= 0 ? View.GONE : View.VISIBLE);
-		messageTv.setText(msgResId <= 0 ? R.string.app_name : msgResId);
-	}
+    public WhiteProgressDialog(Context context, int msgResId) {
+        super(context);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        setContentView(R.layout.white_progress_dialog);
+    }
 }

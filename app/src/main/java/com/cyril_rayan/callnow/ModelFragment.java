@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.UiThread;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
 import android.util.Log;
@@ -23,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.common.utility.CountDownAnimation;
+import com.cyril_rayan.callnow.login.utils.WhiteProgressDialog;
 import com.skyfishjy.library.RippleBackground;
 
 import java.io.File;
@@ -124,19 +126,8 @@ public class ModelFragment extends Fragment implements View.OnClickListener {
 
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_model, container, false);
-        (view.findViewById(R.id.progressbar)).setVisibility(View.VISIBLE);
         TextView headerTv = ((TextView) view.findViewById(R.id.txtToolbarTitle));
         headerTv.setText("Call Now");
-//        final ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Detecting...",
-//                true);
-//        dialog.show();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                (view.findViewById(R.id.progressbar)).setVisibility(View.GONE);
-//                dialog.dismiss();
-            }
-        }, 800);
 
 
         return view;
@@ -221,6 +212,22 @@ public class ModelFragment extends Fragment implements View.OnClickListener {
             }
         }, 100);
 
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run()
+        {
+            (view.findViewById(R.id.gifimage)).setVisibility(View.VISIBLE);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    (view.findViewById(R.id.gifimage)).setVisibility(View.GONE);
+//                progressDialog.dismiss();
+                }
+            }, 1000);
+        }
+//        }).start();
+
+
     }
 
     private void initialize(View view) {
@@ -238,11 +245,19 @@ public class ModelFragment extends Fragment implements View.OnClickListener {
                 startCountDown();
             }
         });
-        try {
-            generateNewModel();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    generateNewModel();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+
         mRecordOne = (TextView) view.findViewById(R.id.recode_one);
         mRecordTwo = (TextView) view.findViewById(R.id.recode_two);
         mRecordThree = (TextView) view.findViewById(R.id.recode_three);
