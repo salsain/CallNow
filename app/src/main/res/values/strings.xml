@@ -36,7 +36,7 @@
     <string name="tel">tel:</string>
     <string name="have_no_activity_for_call">Could not find an activity to place the call.</string>
     <string name="call_sequence_ended">Call sequence was ended</string>
-    <string name="empty_call_list_warning">Calling list empty, press \"SELECT CONTACTS\" and choose persons for call</string>
+    <string name="empty_call_list_warning">Calling list empty, press \"PHONE CONTACTS\" and choose people to call</string>
     <string name="make_calls_cofiration_title">Make calls Confirmation</string>
     <string name="make_calls_cofiration_positive_button">Go!</string>
     <string name="cancel">Cancel</string>

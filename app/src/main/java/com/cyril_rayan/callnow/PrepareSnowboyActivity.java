@@ -114,7 +114,7 @@ public class PrepareSnowboyActivity extends AppCompatActivity implements View.On
             public void onClick(View v) {
                 try {
                     generateNewModel();
-                    Toast.makeText(PrepareSnowboyActivity.this, "Successfully download!", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(PrepareSnowboyActivity.this, "Successfully download!", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(PrepareSnowboyActivity.this, WelcomeScreen.class);
                     startActivity(intent);
                     finish();

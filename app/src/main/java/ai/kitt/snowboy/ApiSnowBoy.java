@@ -1,6 +1,7 @@
 package ai.kitt.snowboy;
 
 import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 

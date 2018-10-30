@@ -109,7 +109,7 @@ public class SelectContactsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 StaticMemory.getInstance().selectedContactClassList = new ArrayList<ContactInfo>();
 
-                for (ContactInfo item : StaticMemory.getInstance().contactClassList){
+                for (ContactInfo item : StaticMemory.getInstance().contactClassList) {
                     if (item.cheched)
                         StaticMemory.getInstance().selectedContactClassList.add(item);
                 }
@@ -131,11 +131,11 @@ public class SelectContactsActivity extends AppCompatActivity {
                 if (search_text.getVisibility() == View.GONE) {
                     search_text.setVisibility(View.VISIBLE);
                     search_button.setImageDrawable(getResources().getDrawable(
-                        R.drawable.zm_tip_right_arrow));
+                            R.drawable.zm_tip_right_arrow));
                 } else {
                     search_text.setVisibility(View.GONE);
                     search_button.setImageDrawable(getResources().getDrawable(
-                        R.drawable.zm_ic_search));
+                            R.drawable.zm_ic_search));
                     search_text.setText("");
                 }
             }
@@ -149,7 +149,7 @@ public class SelectContactsActivity extends AppCompatActivity {
 
             @Override
             public void beforeTextChanged(CharSequence s, int start,
-                int count, int after) {
+                                          int count, int after) {
             }
 
             @Override
@@ -165,11 +165,11 @@ public class SelectContactsActivity extends AppCompatActivity {
             runUserSelectContacts();
     }
 
-    void runGetContacts(final Uri CONTENT_URI){
+    void runGetContacts(final Uri CONTENT_URI) {
         runGetContacts(CONTENT_URI, null);
     }
 
-    void initListFromOSContacts(){
+    void initListFromOSContacts() {
         runGetContacts(ContactsContract.Contacts.CONTENT_URI, new Runnable() {
             @Override
             public void run() {
@@ -179,20 +179,22 @@ public class SelectContactsActivity extends AppCompatActivity {
     }
 
     void performSearch(String text) {
-        if (text.length() > 1) {
-            contactsAdapter.setFilter(text);
-            contactsAdapter.notifyDataSetChanged();
-        } else {
-            contactsAdapter.setFilter(null);
-            contactsAdapter.notifyDataSetChanged();
+        if (contactsAdapter != null) {
+            if (text.length() > 1) {
+                contactsAdapter.setFilter(text);
+                contactsAdapter.notifyDataSetChanged();
+            } else {
+                contactsAdapter.setFilter("");
+                contactsAdapter.notifyDataSetChanged();
+            }
         }
     }
 
-    void runUserSelectContacts(){
+    void runUserSelectContacts() {
         runFillContactsListView();
     }
 
-    void runGetContacts(final Uri CONTENT_URI, final Runnable runnable){
+    void runGetContacts(final Uri CONTENT_URI, final Runnable runnable) {
 
         pDialog = new ProgressDialog(this);
         pDialog.setMessage("Reading contacts...");
@@ -221,7 +223,7 @@ public class SelectContactsActivity extends AppCompatActivity {
         Uri PhoneCONTENT_URI = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
         String Phone_CONTACT_ID = ContactsContract.CommonDataKinds.Phone.CONTACT_ID;
         String NUMBER = ContactsContract.CommonDataKinds.Phone.NUMBER;
-        Uri EmailCONTENT_URI =  ContactsContract.CommonDataKinds.Email.CONTENT_URI;
+        Uri EmailCONTENT_URI = ContactsContract.CommonDataKinds.Email.CONTENT_URI;
         String EmailCONTACT_ID = ContactsContract.CommonDataKinds.Email.CONTACT_ID;
         String DATA = ContactsContract.CommonDataKinds.Email.DATA;
         StringBuffer output;
@@ -246,11 +248,11 @@ public class SelectContactsActivity extends AppCompatActivity {
                 // Update the progress message
                 updateBarHandler.post(new Runnable() {
                     public void run() {
-                        pDialog.setMessage(getString(R.string.reading_contacts_from_os) + counter++ +"/"+cursor.getCount());
+                        pDialog.setMessage(getString(R.string.reading_contacts_from_os) + counter++ + "/" + cursor.getCount());
                     }
                 });
-                String contact_id = cursor.getString(cursor.getColumnIndex( _ID ));
-                String name = cursor.getString(cursor.getColumnIndex( DISPLAY_NAME ));
+                String contact_id = cursor.getString(cursor.getColumnIndex(_ID));
+                String name = cursor.getString(cursor.getColumnIndex(DISPLAY_NAME));
 
                 ArrayList<String> phoneNumberArray = null;
                 String email = null;
@@ -345,7 +347,7 @@ public class SelectContactsActivity extends AppCompatActivity {
         mListView.smoothScrollBy(mListView.getMeasuredHeight(), 1000);
     }
 
-    public class CustomAdapter extends ArrayAdapter{
+    public class CustomAdapter extends ArrayAdapter {
         Context context;
         String filterText;
 
@@ -365,7 +367,7 @@ public class SelectContactsActivity extends AppCompatActivity {
 
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
-            LayoutInflater inflater = ((Activity)context).getLayoutInflater();
+            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             convertView = inflater.inflate(R.layout.contact_list_item, parent, false);
             LinearLayout content = (LinearLayout) convertView.findViewById(R.id.content);
             TextView name = (TextView) convertView.findViewById(R.id.textView1);
@@ -430,12 +432,12 @@ public class SelectContactsActivity extends AppCompatActivity {
         Toast.makeText(SelectContactsActivity.this, String.format(getString(R.string.select_contacts_is_limited), freeSelectContactsCount), Toast.LENGTH_LONG).show();
     }
 
-    boolean countOfSelectedIsOver(){
+    boolean countOfSelectedIsOver() {
         if (StaticMemory.getInstance().enableMore5CallsFeature)
             return false;
 
         int count = 0;
-        for (ContactInfo contact : StaticMemory.getInstance().contactClassList){
+        for (ContactInfo contact : StaticMemory.getInstance().contactClassList) {
             if (contact.cheched)
                 count++;
 

@@ -7,25 +7,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Display;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.ActivityRecognition;
 import com.google.android.gms.location.DetectedActivity;
-import com.cyril_rayan.callnow.R;
+
+//import com.google.android.gms.ads.AdRequest;
+//import com.google.android.gms.ads.AdView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
@@ -38,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public final int MENU_INFO = 3;
     android.support.v4.app.FragmentManager mFragmentManager;
 
-    private AdView mAdView;
+//    private AdView mAdView;
     private TextView callNowTab, infoTab, modelTab;
     private LinearLayout bottomTabLl;
 
@@ -70,15 +67,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     void prepareAd() {
-        mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder()
-                .build();
-        mAdView.loadAd(adRequest);
+//        mAdView = (AdView) findViewById(R.id.adView);
+//        AdRequest adRequest = new AdRequest.Builder()
+//                .build();
+//        mAdView.loadAd(adRequest);
     }
 
     void updateAdVisiblity() {
-        if (mAdView != null)
-            mAdView.setVisibility(StaticMemory.getInstance().isPayVersion() ? View.GONE : View.GONE);
+//        if (mAdView != null)
+//            mAdView.setVisibility(StaticMemory.getInstance().isPayVersion() ? View.GONE : View.GONE);
     }
 
     @Override

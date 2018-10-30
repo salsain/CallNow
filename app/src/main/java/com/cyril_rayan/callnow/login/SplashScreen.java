@@ -7,10 +7,7 @@ import android.os.Handler;
 import android.view.Window;
 
 import com.cyril_rayan.callnow.MainActivity;
-import com.cyril_rayan.callnow.PrepareSnowboyActivity;
-import com.cyril_rayan.callnow.PrepareSnowboyActivityCopy;
 import com.cyril_rayan.callnow.R;
-import com.cyril_rayan.callnow.WelcomeScreen;
 import com.cyril_rayan.callnow.login.utils.SharedpreferenceUtility;
 
 /**

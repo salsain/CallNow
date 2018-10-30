@@ -8,10 +8,10 @@ def versionPatch = 2 //before 999 (rise on bug fixing and etc)
 android {
     signingConfigs {
         config {
-            keyAlias 'callnow'
-            keyPassword 'android'
-            storeFile file('G:/Zolute Drive/Project/CallNow/call_now_android/keystore.jks')
-            storePassword 'android'
+            keyAlias 'key0'
+            keyPassword 'aliso;jdf349p.924'
+            storeFile file('G:/Zolute Drive/Project/CallNow/call_now_android/keyStoreRelease.jks')
+            storePassword 'aliso;jdf349p.924'
         }
     }
     compileSdkVersion 27
@@ -37,6 +37,7 @@ android {
 //    }
     buildTypes {
         release {
+//            debuggable true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
@@ -85,7 +86,7 @@ dependencies {
     implementation 'com.jakewharton:butterknife:8.8.1'
 //    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
-    implementation 'com.google.android.gms:play-services-ads:17.0.0'
+//    implementation 'com.google.android.gms:play-services-ads:17.0.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     //    implementation 'com.splunk:mint-android-sdk:5.2.4'
