@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,14 +35,16 @@ import android.os.Handler;
 
 import com.common.utility.PermissionCheckService;
 import com.common.utility.ViaAdActivityRunner;
+import com.google.in_app_purchasing.util.IabHelper;
 import com.skyfishjy.library.RippleBackground;
 
 import ai.kitt.snowboy.AppResCopy;
 import ai.kitt.snowboy.audio.RecordingThread;
 import ai.kitt.snowboy.MsgEnum;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends BaseSubscriptionfragment {
 
+    private static final String TAG = "Subscription";
     //    View runUserSelectContactsButton;
     View runManualAddContactsButton;
     View runImportCRMContactsButton;
@@ -104,13 +107,16 @@ public class MainFragment extends Fragment {
     };
     private RippleBackground rippleBackground;
     private RippleBackground rippleBackgrounds;
+    private Button msubscribeSalesForceBtn, msubscribeContactsBtn;
 
+    public MainFragment() {
+        // Required empty public constructor
+    }
 
     void resetSequence() {
         sequenceCalling = false;
         callContactSequenceIndex = 0;
     }
-
 
 
     void showToast(CharSequence msg) {
@@ -120,6 +126,7 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
         return inflater.inflate(R.layout.main_fragment, container, false);
     }
 
@@ -177,10 +184,79 @@ public class MainFragment extends Fragment {
 
         addCallListener();
 
-        AppResCopy.copyResFromAssetsToSD(getContext());
+        AppResCopy.copyResFromAssetsToSD(getActivity());
 
         recordingThread = new RecordingThread(handle, null);//new AudioDataSaver()
 
+        msubscribeSalesForceBtn = getView().findViewById(R.id.subscribe_salesforce_btn);
+        msubscribeSalesForceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SubscribeSalesForce();
+            }
+        });
+        msubscribeContactsBtn = getView().findViewById(R.id.subscribe_contacts_btn);
+        msubscribeContactsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SubscribeContacts();
+            }
+        });
+    }
+
+    private void SubscribeContacts() {
+        AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
+                .setTitle("Phone Contacts Access")
+                .setMessage("For full access on contacts @$5.99 / Year, click SUBSCRIBE.")
+                .setCancelable(false)
+                .setPositiveButton("SUBSCRIBE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        onUpgradeAppButtonClicked();
+                    }
+                })
+                .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+
+                .create();
+        alertDialog.show();
+        Button buttonN = alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
+        buttonN.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        Button buttonP = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        buttonP.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+//        alertDialog.get
+    }
+
+    private void SubscribeSalesForce() {
+        AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
+                .setTitle("Salesforce Contacts ")
+                .setMessage("For access on salesforce contacts @$35.99 / Year, click SUBSCRIBE.")
+                .setCancelable(false)
+                .setPositiveButton("SUBSCRIBE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        onInfiniteGasButtonClicked();
+                    }
+                })
+                .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+
+                .create();
+        alertDialog.show();
+        Button buttonN = alertDialog.getButton(DialogInterface.BUTTON_NEUTRAL);
+        buttonN.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        Button buttonP = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        buttonP.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
     }
 
     void runNextPhoneFromContactList() {
@@ -467,8 +543,9 @@ public class MainFragment extends Fragment {
                     // Do something with spokenText
                 }
             }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
         }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void doVoiceCommand(String spokenText_) {
