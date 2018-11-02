@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="com.cyril_rayan.callnow.MainActivity">
+        tools:context="com.resiligence.callnow.MainActivity">
 
         <RelativeLayout
             android:id="@+id/mainLl"
@@ -25,15 +25,15 @@
 
         </RelativeLayout>
 
-      <!--  <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:visibility="gone"
-            ads:adSize="BANNER"
-            app:adUnitId="@string/banner_footer_ad_unit_id"></com.google.android.gms.ads.AdView>-->
+        <!--  <com.google.android.gms.ads.AdView
+              android:id="@+id/adView"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:layout_centerHorizontal="true"
+              android:visibility="gone"
+              ads:adSize="BANNER"
+              app:adUnitId="@string/banner_footer_ad_unit_id"></com.google.android.gms.ads.AdView>-->
 
         <LinearLayout
             android:id="@+id/bottomTabLl"
@@ -58,7 +58,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="1dp"
                     android:drawableLeft="@drawable/blue_call_now_selector"
-                    android:drawablePadding="8dp"
+                    android:drawablePadding="4dp"
                     android:gravity="center"
                     android:text="Make Call"
                     android:textColor="@drawable/hover_text_selector"
@@ -83,7 +83,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="1dp"
                     android:drawableLeft="@drawable/blue_voice_selector"
-                    android:drawablePadding="8dp"
+                    android:drawablePadding="4dp"
                     android:gravity="center"
                     android:text="Voice Recorder"
                     android:textColor="@drawable/hover_text_selector"
@@ -108,7 +108,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="1dp"
                     android:drawableLeft="@drawable/blue_info_selector"
-                    android:drawablePadding="8dp"
+                    android:drawablePadding="4dp"
                     android:gravity="center"
                     android:text="Info"
                     android:textColor="@drawable/hover_text_selector"
@@ -124,8 +124,8 @@
         android:id="@+id/userActivityTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
         android:padding="10dp"
         android:text="UNKNOWN ACTIVITY"
         android:textColor="@color/colorAccent"

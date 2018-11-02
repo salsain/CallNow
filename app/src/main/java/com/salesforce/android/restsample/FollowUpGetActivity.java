@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.common.utility.Clipboard;
-import com.cyril_rayan.callnow.ContactInfo;
-import com.cyril_rayan.callnow.R;
-import com.cyril_rayan.callnow.StaticMemory;
+import com.resiligence.callnow.ContactInfo;
+import com.resiligence.callnow.R;
+import com.resiligence.callnow.StaticMemory;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;

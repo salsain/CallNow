@@ -19,9 +19,9 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import com.common.utility.Clipboard;
-import com.cyril_rayan.callnow.ContactInfo;
-import com.cyril_rayan.callnow.R;
-import com.cyril_rayan.callnow.StaticMemory;
+import com.resiligence.callnow.ContactInfo;
+import com.resiligence.callnow.R;
+import com.resiligence.callnow.StaticMemory;
 
 public class AccountGetActivity extends Activity {
     @Override

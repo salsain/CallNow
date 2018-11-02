@@ -1,22 +1,20 @@
 package com.common.utility;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 
-import com.cyril_rayan.callnow.AddContactActivity;
-import com.cyril_rayan.callnow.AutoConnectToZoomActivity;
-import com.cyril_rayan.callnow.SelectContactsActivity;
-import com.cyril_rayan.callnow.StaticMemory;
+import com.resiligence.callnow.AddContactActivity;
+import com.resiligence.callnow.AutoConnectToZoomActivity;
+import com.resiligence.callnow.SelectContactsActivity;
+import com.resiligence.callnow.StaticMemory;
 import com.google.ad.AdxActivity;
 import com.salesforce.android.restsample.SfdcRestSample;
 
-import static com.cyril_rayan.callnow.MainFragment.REQUEST_AUTO_CONNECT_TO_ZOOM;
-import static com.cyril_rayan.callnow.MainFragment.REQUEST_IMPORT_SALESFORCE_CONTACTS;
-import static com.cyril_rayan.callnow.MainFragment.REQUEST_MANUAL_ADD_CONTACTS;
-import static com.cyril_rayan.callnow.MainFragment.REQUEST_SELECT_CONTACTS;
+import static com.resiligence.callnow.MainFragment.REQUEST_AUTO_CONNECT_TO_ZOOM;
+import static com.resiligence.callnow.MainFragment.REQUEST_IMPORT_SALESFORCE_CONTACTS;
+import static com.resiligence.callnow.MainFragment.REQUEST_MANUAL_ADD_CONTACTS;
+import static com.resiligence.callnow.MainFragment.REQUEST_SELECT_CONTACTS;
 
 /**
  * Created by Айрат on 02.08.2017.

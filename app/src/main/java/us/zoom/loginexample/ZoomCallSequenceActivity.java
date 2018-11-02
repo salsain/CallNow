@@ -5,14 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
-import com.cyril_rayan.callnow.R;
-import com.cyril_rayan.callnow.StaticMemory;
-import com.cyril_rayan.callnow.ZoomUaUtility.ZoomCallInfo;
-import us.zoom.sdk.InstantMeetingOptions;
-import us.zoom.sdk.JoinMeetingOptions;
+import com.resiligence.callnow.R;
+import com.resiligence.callnow.StaticMemory;
+import com.resiligence.callnow.ZoomUaUtility.ZoomCallInfo;
+
 import us.zoom.sdk.MeetingError;
 import us.zoom.sdk.MeetingEvent;
 import us.zoom.sdk.MeetingService;

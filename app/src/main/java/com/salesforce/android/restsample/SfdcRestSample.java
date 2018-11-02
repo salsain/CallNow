@@ -19,13 +19,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
 
-import com.cyril_rayan.callnow.R;
-import com.cyril_rayan.callnow.StaticMemory;
-import com.cyril_rayan.callnow.SubscriptionsScreen;
+import com.resiligence.callnow.R;
+import com.resiligence.callnow.StaticMemory;
+import com.resiligence.callnow.SubscriptionsScreen;
 
-import static com.cyril_rayan.callnow.MainFragment.REQUEST_IMPORT_SALESFORCE_CONTACTS;
+import static com.resiligence.callnow.MainFragment.REQUEST_IMPORT_SALESFORCE_CONTACTS;
 
 public class SfdcRestSample extends Activity {
 

@@ -24,7 +24,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cyril_rayan.callnow.R;
+import com.resiligence.callnow.R;
 
 public class ZoomPreMeetingExampleActivity extends Activity implements OnClickListener, PreMeetingServiceListener{
 

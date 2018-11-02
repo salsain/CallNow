@@ -9,7 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.common.utility.ViaAdActivityRunner;
-import com.cyril_rayan.callnow.R;
+import com.resiligence.callnow.R;
 //import com.google.android.gms.ads.AdListener;
 //import com.google.android.gms.ads.AdRequest;
 //import com.google.android.gms.ads.InterstitialAd;

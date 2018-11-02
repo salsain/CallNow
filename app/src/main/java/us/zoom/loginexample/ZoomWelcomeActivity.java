@@ -15,7 +15,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.cyril_rayan.callnow.R;
+import com.resiligence.callnow.R;
 
 public class ZoomWelcomeActivity extends Activity implements ZoomConstants, ZoomSDKInitializeListener, ZoomSDKAuthenticationListener ,OnClickListener{
 

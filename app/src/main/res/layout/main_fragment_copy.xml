@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context="com.cyril_rayan.callnow.MainFragment">
+    tools:context="com.resiligence.callnow.MainFragment">
 
     <RelativeLayout
         android:layout_width="fill_parent"

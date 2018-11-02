@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
    Copyright 2012 Google Inc. All rights reserved.
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,57 +16,58 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ImageView
         android:id="@+id/screen_wait"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:contentDescription="@string/content_description_app_loading_image"
         android:src="@drawable/wait"
         android:visibility="gone" />
+
     <LinearLayout
         android:id="@+id/screen_main"
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
         android:visibility="visible">
 
 
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/moreThen5CallsEnabled"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="moreThen5CallsEnabled"
-                android:layout_width="wrap_content"/>
+                android:text="moreThen5CallsEnabled" />
 
             <Button
                 android:id="@+id/more_then_5_calls"
-                android:text="More then 5 Calls"
                 android:layout_width="wrap_content"
-                android:onClick="onUpgradeAppButtonClicked"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="20dp"
+                android:onClick="onUpgradeAppButtonClicked"
+                android:text="More then 5 Calls" />
 
             <TextView
                 android:id="@+id/salesForceEnabled"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="salesForceEnabled"
-                android:layout_width="wrap_content"/>
+                android:text="salesForceEnabled" />
 
             <Button
                 android:id="@+id/infinite_gas_button"
-                android:text="SalesForce CRM"
                 android:layout_width="wrap_content"
-                android:onClick="onInfiniteGasButtonClicked"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="20dp"
+                android:onClick="onInfiniteGasButtonClicked"
+                android:text="SalesForce CRM" />
 
         </LinearLayout>
     </LinearLayout>

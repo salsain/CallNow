@@ -1,8 +1,8 @@
 package us.zoom.loginexample;
 
 import android.os.Handler;
-import com.cyril_rayan.callnow.StaticMemory;
-import com.cyril_rayan.callnow.ZoomUaUtility.ZoomCallInfo;
+import com.resiligence.callnow.StaticMemory;
+import com.resiligence.callnow.ZoomUaUtility.ZoomCallInfo;
 import us.zoom.sdk.InstantMeetingOptions;
 import us.zoom.sdk.JoinMeetingOptions;
 import us.zoom.sdk.MeetingError;
@@ -21,7 +21,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.cyril_rayan.callnow.R;
+import com.resiligence.callnow.R;
 
 public class ZoomWorkEmailUserExampleActivity extends Activity implements ZoomConstants, MeetingServiceListener, ZoomSDKAuthenticationListener {
 

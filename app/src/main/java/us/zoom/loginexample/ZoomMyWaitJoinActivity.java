@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.cyril_rayan.callnow.R;
+import com.resiligence.callnow.R;
 
 
 public class ZoomMyWaitJoinActivity extends Activity implements View.OnClickListener, MeetingServiceListener{

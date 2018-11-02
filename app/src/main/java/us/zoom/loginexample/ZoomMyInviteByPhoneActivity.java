@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.cyril_rayan.callnow.R;
+import com.resiligence.callnow.R;
 
 public class ZoomMyInviteByPhoneActivity extends Activity implements View.OnClickListener, DialOutStatusListener{
 	private static final String TAG = ZoomMyInviteByPhoneActivity.class.getSimpleName();
