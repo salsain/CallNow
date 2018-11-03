@@ -1,8 +1,10 @@
 package com.common.utility;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.resiligence.callnow.AddContactActivity;
 import com.resiligence.callnow.AutoConnectToZoomActivity;
@@ -30,7 +32,7 @@ public class ViaAdActivityRunner {
 
     public static void runAddContactActivity(Activity activity) {
         activityForRetrieveResult = activity;
-        if (StaticMemory.getInstance().isPayVersion()) {
+        if (StaticMemory.getInstance().isPayContactVersion()) {
             startActivityByName(AddContactActivity.class.getName(), REQUEST_MANUAL_ADD_CONTACTS, null);
             return;
         }
@@ -40,7 +42,7 @@ public class ViaAdActivityRunner {
 
     public static void runAutoConnectToZoom(Activity activity) {
         activityForRetrieveResult = activity;
-        if (StaticMemory.getInstance().isPayVersion()) {
+        if (StaticMemory.getInstance().isPayContactVersion()) {
             startActivityByName(AutoConnectToZoomActivity.class.getName(), REQUEST_AUTO_CONNECT_TO_ZOOM, null);
             return;
         }
@@ -50,17 +52,23 @@ public class ViaAdActivityRunner {
 
     public static void runSalesForceActivity(Activity activity) {
         activityForRetrieveResult = activity;
-        if (StaticMemory.getInstance().isPayVersion()) {
+        if (StaticMemory.getInstance().isPaySalesForceVersion()) {
             startActivityByName(SfdcRestSample.class.getName(), REQUEST_IMPORT_SALESFORCE_CONTACTS, null);
             return;
-        }
+        } else {
 
-        runAdxWithParams(SfdcRestSample.class.getName(), REQUEST_IMPORT_SALESFORCE_CONTACTS, null);
+            AlertDialog.Builder bld = new AlertDialog.Builder(activity);
+            bld.setMessage("Need subscription");
+            bld.setNeutralButton("OK", null);
+            bld.create().show();
+
+        }
+//        runAdxWithParams(SfdcRestSample.class.getName(), REQUEST_IMPORT_SALESFORCE_CONTACTS, null);
     }
 
     public static void runSelectContactsActivity(Activity activity, boolean useSystemContacts) {
         activityForRetrieveResult = activity;
-        if (StaticMemory.getInstance().isPayVersion()) {
+        if (StaticMemory.getInstance().isPayContactVersion()) {
             startActivityByName(SelectContactsActivity.class.getName(), REQUEST_SELECT_CONTACTS, useSystemContacts ? "true" : "false");
             return;
         }
@@ -68,17 +76,15 @@ public class ViaAdActivityRunner {
         runAdxWithParams(SelectContactsActivity.class.getName(), REQUEST_SELECT_CONTACTS, useSystemContacts ? "true" : "false");
     }
 
-    public static void startActivityByName(String classname, int activityResultID, String specialParam1){
+    public static void startActivityByName(String classname, int activityResultID, String specialParam1) {
         Activity activity = activityForRetrieveResult;
         if (classname.equals(AddContactActivity.class.getName())) {
             Intent intent = new Intent(activity, AddContactActivity.class);
             activity.startActivityForResult(intent, activityResultID);
-        } else
-        if (classname.equals(SfdcRestSample.class.getName())) {
+        } else if (classname.equals(SfdcRestSample.class.getName())) {
             Intent intent = new Intent(activity, SfdcRestSample.class);
             activity.startActivityForResult(intent, activityResultID);
-        } else
-        if (classname.equals(SelectContactsActivity.class.getName())) {
+        } else if (classname.equals(SelectContactsActivity.class.getName())) {
             Intent intent = new Intent(activity, SelectContactsActivity.class);
             if (specialParam1 != null) {
                 Bundle b = new Bundle();
@@ -86,8 +92,7 @@ public class ViaAdActivityRunner {
                 intent.putExtras(b);
             }
             activity.startActivityForResult(intent, activityResultID);
-        } else
-        if (classname.equals(AutoConnectToZoomActivity.class.getName())) {
+        } else if (classname.equals(AutoConnectToZoomActivity.class.getName())) {
             Intent intent = new Intent(activity, AutoConnectToZoomActivity.class);
             activity.startActivityForResult(intent, activityResultID);
         }

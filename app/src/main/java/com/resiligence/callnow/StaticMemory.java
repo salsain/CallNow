@@ -38,8 +38,7 @@ public class StaticMemory {
         this.selectedAccount = selectedAccount;
     }
 
-    public static StaticMemory getInstance()
-    {
+    public static StaticMemory getInstance() {
         //we add static instance to main context thread.
         //Do not remove it from MainApplication because it is main context and this instance will be live with any activity
         if (MainApplication.staticMemory == null)
@@ -47,8 +46,15 @@ public class StaticMemory {
 
         return MainApplication.staticMemory;
     }
+//    public boolean isPayVersion() {
+//        return (enableMore5CallsFeature || enableSalesForceFeature);
+//    }
 
-    public boolean isPayVersion() {
-        return (enableMore5CallsFeature || enableSalesForceFeature);
+    public boolean isPaySalesForceVersion() {
+        return ( enableSalesForceFeature);
+    }
+
+    public boolean isPayContactVersion() {
+        return (enableMore5CallsFeature);
     }
 }

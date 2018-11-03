@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 
 def versionMajor = 1 //before 9
 def versionMinor = 0 //before 9 (rise only if new features created)
-def versionPatch = 2 //before 999 (rise on bug fixing and etc)
+def versionPatch = 3 //before 999 (rise on bug fixing and etc)
 
 android {
     signingConfigs {
@@ -19,7 +19,7 @@ android {
         applicationId "com.resiligence.callnow"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 10002
+        versionCode 10003
 //        versionName "1.0"
 //        versionCode "${versionMajor * 10000} + ${versionMinor* 100 } + ${versionPatch}"
         versionName "${versionMajor}.${versionMinor}.${versionPatch}"

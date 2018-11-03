@@ -543,8 +543,8 @@ public class MainFragment extends BaseSubscriptionfragment {
                 }
             }
         } else {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     private void doVoiceCommand(String spokenText_) {

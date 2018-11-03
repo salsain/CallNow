@@ -33,6 +33,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.in_app_purchasing.util.IabBroadcastReceiver;
+import com.google.in_app_purchasing.util.IabException;
 import com.google.in_app_purchasing.util.IabHelper;
 import com.google.in_app_purchasing.util.IabResult;
 import com.google.in_app_purchasing.util.Inventory;
