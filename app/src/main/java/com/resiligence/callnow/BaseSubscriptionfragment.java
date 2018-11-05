@@ -403,11 +403,11 @@ public class BaseSubscriptionfragment extends Fragment implements IabBroadcastRe
     }
 
     void alert(String message) {
-        Builder bld = new Builder(getActivity());
-        bld.setMessage(message);
-        bld.setNeutralButton("OK", null);
+//        Builder bld = new Builder(getActivity());
+//        bld.setMessage(message);
+//        bld.setNeutralButton("OK", null);
         Log.d(TAG, "Showing alert dialog: " + message);
-        bld.create().show();
+//        bld.create().show();
     }
 
     void saveData() {

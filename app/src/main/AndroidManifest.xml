@@ -20,7 +20,7 @@
         android:protectionLevel="signature" />
 
     <uses-permission android:name="us.zoom.loginexample.permission.KUBI_MESSAGE" />
-    <uses-permission android:name="com.android.vending.BILLING" />
+  <!--  <uses-permission android:name="com.android.vending.BILLING" />-->
 
     <application
         android:name="com.resiligence.callnow.MainApplication"

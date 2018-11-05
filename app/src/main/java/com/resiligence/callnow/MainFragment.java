@@ -188,6 +188,7 @@ public class MainFragment extends BaseSubscriptionfragment {
         recordingThread = new RecordingThread(handle, null);//new AudioDataSaver()
 
         msubscribeSalesForceBtn = getView().findViewById(R.id.subscribe_salesforce_btn);
+        msubscribeSalesForceBtn.setVisibility(View.GONE);
         msubscribeSalesForceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -566,7 +567,11 @@ public class MainFragment extends BaseSubscriptionfragment {
     }
 
     private void runImportCRMContacts() {
-        ViaAdActivityRunner.runSalesForceActivity(getActivity());
+        if (StaticMemory.getInstance().isPaySalesForceVersion()) {
+            ViaAdActivityRunner.runSalesForceActivity(getActivity());
+        } else {
+            SubscribeSalesForce();
+        }
     }
 
     private void runManualAddContacts() {
