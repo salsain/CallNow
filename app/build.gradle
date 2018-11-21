@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 
 def versionMajor = 1 //before 9
-def versionMinor = 1 //before 9 (rise only if new features created)
+def versionMinor = 2 //before 9 (rise only if new features created)
 def versionPatch = 0 //before 999 (rise on bug fixing and etc)
 
 android {
@@ -19,8 +19,8 @@ android {
         applicationId "com.resiligence.callnow"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 10100
-        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+        versionCode 10200
+        versionName "${versionMajor}.${versionMinor}"//.${versionPatch}
         multiDexEnabled true
     }
 //    applicationVariants.all { variant ->

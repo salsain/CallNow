@@ -206,8 +206,8 @@ public class MainFragment extends BaseSubscriptionfragment {
 
     private void SubscribeContacts() {
         AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
-                .setTitle("Phone Contacts Access")
-                .setMessage("For full access on contacts @$5.99 / Year, click SUBSCRIBE.")
+                .setTitle("Connect to more phone contacts")
+                .setMessage("To make more than 5 calls in sequence @$5.99 / Year, Click SUBSCRIBE.")
                 .setCancelable(false)
                 .setPositiveButton("SUBSCRIBE", new DialogInterface.OnClickListener() {
                     @Override
@@ -234,8 +234,8 @@ public class MainFragment extends BaseSubscriptionfragment {
 
     private void SubscribeSalesForce() {
         AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
-                .setTitle("Salesforce Contacts ")
-                .setMessage("For access on salesforce contacts @$35.99 / Year, click SUBSCRIBE.")
+                .setTitle("Connect to Salesforce CRM")
+                .setMessage("For making accelerated sales calls to salesforce CRM contacts @$35.99 / Year, Click SUBSCRIBE.")
                 .setCancelable(false)
                 .setPositiveButton("SUBSCRIBE", new DialogInterface.OnClickListener() {
                     @Override
