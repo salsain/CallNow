@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Handler;
 import android.provider.ContactsContract;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -57,16 +58,42 @@ public class SelectContactsActivity extends AppCompatActivity {
 
     EditText search_text;
     ImageButton search_button;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private Button mSyncBtn;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_contacts);
-
+        Bundle b = getIntent().getExtras();
+        final boolean useSystemContacts = b.getBoolean(USE_SYSTEM_CONTACTS);
         mListView = (ListView) findViewById(R.id.list);
         updateBarHandler = new Handler();
+        /**/
 
+        mSyncBtn= findViewById(R.id.sync_btn);
+        mSyncBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (useSystemContacts)
+                    initListFromOSContacts();
+                else
+                    runUserSelectContacts();
+            }
+        });
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mSwipeRefreshLayout.setRefreshing(false);
+                if (useSystemContacts)
+                    initListFromOSContacts();
+                else
+                    runUserSelectContacts();
+            }
+        });
         // Set onclicklistener to the list item.
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -119,8 +146,6 @@ public class SelectContactsActivity extends AppCompatActivity {
             }
         });
 
-        Bundle b = getIntent().getExtras();
-        boolean useSystemContacts = b.getBoolean(USE_SYSTEM_CONTACTS);
 
         search_text = (EditText) findViewById(R.id.search_text);
         search_text.setVisibility(View.GONE);
@@ -160,7 +185,13 @@ public class SelectContactsActivity extends AppCompatActivity {
         });
 
         if (useSystemContacts)
-            initListFromOSContacts();
+            if (StaticMemory.contactStaticList != null && StaticMemory.contactStaticList.size() > 0) {
+                StaticMemory.getInstance().contactClassList = new ArrayList<>(StaticMemory.contactStaticList);
+                contactsAdapter = new CustomAdapter(SelectContactsActivity.this);
+                mListView.setAdapter(contactsAdapter);
+            } else {
+                initListFromOSContacts();
+            }
         else
             runUserSelectContacts();
     }
@@ -332,6 +363,7 @@ public class SelectContactsActivity extends AppCompatActivity {
                 //adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_checked, contactStringsList);
                 contactsAdapter = new CustomAdapter(SelectContactsActivity.this);
                 mListView.setAdapter(contactsAdapter);
+                StaticMemory.contactStaticList = new ArrayList<>(StaticMemory.getInstance().contactClassList);
             }
         });
     }

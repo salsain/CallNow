@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class StaticMemory {
     public boolean enableMore5CallsFeature = false;
     public boolean enableSalesForceFeature = false;
-
+    public static ArrayList<ContactInfo> contactStaticList;
     public volatile ArrayList<ContactInfo> contactClassList;
     public volatile ArrayList<ContactInfo> selectedContactClassList;
     public volatile ArrayList<ZoomCallInfo> zoomCallMetaInfos;
@@ -51,7 +51,7 @@ public class StaticMemory {
 //    }
 
     public boolean isPaySalesForceVersion() {
-        return ( enableSalesForceFeature);
+        return (enableSalesForceFeature);
     }
 
     public boolean isPayContactVersion() {

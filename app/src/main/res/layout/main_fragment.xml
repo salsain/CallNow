@@ -73,7 +73,7 @@
                 android:id="@+id/makeCallsButton"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_above="@+id/sync"
+                android:layout_above="@+id/bottom_btn_ll"
                 android:layout_margin="10dp"
                 android:background="@color/white"
                 android:text="Make Call"
@@ -83,6 +83,7 @@
 
             <TextView
                 android:id="@+id/sync"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/bottom_btn_ll"

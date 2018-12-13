@@ -442,17 +442,7 @@ public class MainFragment extends BaseSubscriptionfragment {
     }
 
     void runSequenceCallingFromContactList() {
-        String listForCallString = new CallnowPrefrences(getActivity()).getcontactName();
-        if ((listForCallString == null)) {
-            listForCallString = getContactsListStringForMakeCalls();
-            new CallnowPrefrences(getActivity()).setcontactName(listForCallString);
-        }
-
-        if (listForCallString.length() == 0) {
-            listForCallString = getContactsListStringForMakeCalls();
-            new CallnowPrefrences(getActivity()).setcontactName(listForCallString);
-        }
-
+        String listForCallString = getContactsListStringForMakeCalls();
         if (listForCallString == null) {
             Toast.makeText(getActivity(), getString(R.string.empty_call_list_warning), Toast.LENGTH_LONG).show();
             return;
