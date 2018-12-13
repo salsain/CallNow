@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 
 def versionMajor = 1 //before 9
-def versionMinor = 2 //before 9 (rise only if new features created)
+def versionMinor = 3 //before 9 (rise only if new features created)
 def versionPatch = 0 //before 999 (rise on bug fixing and etc)
 
 android {
@@ -19,7 +19,7 @@ android {
         applicationId "com.resiligence.callnow"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 10200
+        versionCode 10300
         versionName "${versionMajor}.${versionMinor}"//.${versionPatch}
         multiDexEnabled true
     }
@@ -45,7 +45,7 @@ android {
     useLibrary 'org.apache.http.legacy'
     productFlavors {
     }
-    buildToolsVersion '27.0.3'
+    buildToolsVersion '28.0.3'
 //    dexOptions {
 //        incremental true
 //    }

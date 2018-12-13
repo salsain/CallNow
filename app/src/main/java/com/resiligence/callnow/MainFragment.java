@@ -32,6 +32,7 @@ import java.util.List;
 
 import android.os.Handler;
 
+import com.common.utility.CallnowPrefrences;
 import com.common.utility.PermissionCheckService;
 import com.common.utility.ViaAdActivityRunner;
 import com.google.in_app_purchasing.util.IabHelper;
@@ -107,6 +108,7 @@ public class MainFragment extends BaseSubscriptionfragment {
     private RippleBackground rippleBackground;
     private RippleBackground rippleBackgrounds;
     private Button msubscribeSalesForceBtn, msubscribeContactsBtn;
+    private TextView mSyncTv;
 
     public MainFragment() {
         // Required empty public constructor
@@ -202,6 +204,20 @@ public class MainFragment extends BaseSubscriptionfragment {
                 SubscribeContacts();
             }
         });
+
+        mSyncTv = getView().findViewById(R.id.sync);
+        mSyncTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                syncContact();
+            }
+        });
+    }
+
+    private void syncContact() {
+        String listForCallString = getContactsListStringForMakeCalls();
+        new CallnowPrefrences(getActivity()).setcontactName(listForCallString);
+
     }
 
     private void SubscribeContacts() {
@@ -426,7 +442,17 @@ public class MainFragment extends BaseSubscriptionfragment {
     }
 
     void runSequenceCallingFromContactList() {
-        String listForCallString = getContactsListStringForMakeCalls();
+        String listForCallString = new CallnowPrefrences(getActivity()).getcontactName();
+        if ((listForCallString == null)) {
+            listForCallString = getContactsListStringForMakeCalls();
+            new CallnowPrefrences(getActivity()).setcontactName(listForCallString);
+        }
+
+        if (listForCallString.length() == 0) {
+            listForCallString = getContactsListStringForMakeCalls();
+            new CallnowPrefrences(getActivity()).setcontactName(listForCallString);
+        }
+
         if (listForCallString == null) {
             Toast.makeText(getActivity(), getString(R.string.empty_call_list_warning), Toast.LENGTH_LONG).show();
             return;
@@ -530,6 +556,7 @@ public class MainFragment extends BaseSubscriptionfragment {
             } else if (requestCode == REQUEST_SELECT_CONTACTS) {
                 callContactCurrentIndex = 0;
                 resetSequence();
+                syncContact();
                 return;
             } else if (requestCode == REQUEST_VOICE_RECOGNITION_CODE) {
                 List<String> results = data.getStringArrayListExtra(

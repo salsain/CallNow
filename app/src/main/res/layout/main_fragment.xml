@@ -73,13 +73,26 @@
                 android:id="@+id/makeCallsButton"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_above="@+id/bottom_btn_ll"
+                android:layout_above="@+id/sync"
                 android:layout_margin="10dp"
                 android:background="@color/white"
                 android:text="Make Call"
                 android:textColor="@color/blue_btn"
                 android:textSize="18sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/sync"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/bottom_btn_ll"
+                android:layout_centerHorizontal="true"
+                android:background="?selectableItemBackgroundBorderless"
+                android:gravity="left|center_vertical"
+                android:padding="8dp"
+                android:text="SYNC"
+                android:textColor="@drawable/white_text_selector"
+                android:textSize="14sp" />
 
             <LinearLayout
                 android:id="@+id/bottom_btn_ll"
